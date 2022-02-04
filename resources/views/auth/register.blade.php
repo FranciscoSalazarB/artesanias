@@ -10,6 +10,7 @@
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('register') }}">
+            <h3>Registrarse</h3>
             @csrf
 
             <!-- Name -->

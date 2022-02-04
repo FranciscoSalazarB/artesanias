@@ -3,21 +3,27 @@
     padding: 0%;
     font-family: Arial, Helvetica, sans-serif;
 }
-nav{
-    background-color: #282a2b;
-    color: white;
-    position: fixed;
-    width: 100%;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+body{
+    background-color: white !important;
+}
+.container_card_login{
+    margin-bottom: -3rem;
 }
 .nav_bar{ 
+    background-color: #282a2b !important;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     width: auto;
     display: flex;
-    padding: 1rem;
+    padding: 0.8rem;
     max-width: 100%;
     justify-content: space-between;
+    color: white !important;
+    position: fixed;
+    width: 100%;
 }
-
+h1{
+    color: white;
+}
 .nav_bar>ul{
     display: flex;
     max-width: 50%;
