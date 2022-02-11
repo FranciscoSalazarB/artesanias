@@ -1,0 +1,10 @@
+Vue.component('artesania',{
+    props:{
+        artesania_atributes:''
+    },
+    methods:{
+        agregar(){
+            this.$root.$emmit('addCarr',this.props);
+        }
+    }
+});

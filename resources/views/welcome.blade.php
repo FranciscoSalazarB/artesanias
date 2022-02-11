@@ -21,8 +21,24 @@
             }
         </style>
         <link rel="stylesheet" href="{{asset('css/index.css')}}">
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+        <script src="{{asset('js/catalogo_component.js')}}"></script>
+        <script src="{{asset('js/artesania_component.js')}}"></script>
+        <script src="{{asset('js/carrito_component.js')}}"></script>
     </head>
     <body class="antialiased">
-        <x-nav_bar/>
+        <div id="app">
+            <x-nav_bar/>
+            <x-catalogo/>
+            <x-carrito/>
+        </div>
     </body>
+    <script>
+        let csrf_token =  document.getElementById('csrf_token');
+        if(csrf_token !== null) Vue.http.headers.common['X-CSRF-TOKEN'] = csrf_token.value;
+        var app = new Vue({
+            el:'#app'
+        })
+    </script>
 </html>

@@ -21,4 +21,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::post('/catalogo', function (){
+    return "funciona";
+})->name('artesanias');
+
 require __DIR__.'/auth.php';
