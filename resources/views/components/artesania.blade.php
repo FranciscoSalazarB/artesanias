@@ -6,7 +6,8 @@
             <p class="descript">@{{artesania_atributes.descript}}</p>
             <p>$@{{artesania_atributes.precio}}</p>
             @auth
-                <a href="#" class="button_card" >Agregar al carrito</a>
+                <p v-if="apartado" class="apartado">Agregado</p>
+                <a href="#" class="button_card" v-on:click="agregar" v-else>Agregar al carrito</a>
             @endauth
         </div>
     </artesania>

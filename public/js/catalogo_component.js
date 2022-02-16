@@ -2,12 +2,12 @@ Vue.component('catalogo',{
     data(){
         return {
             listas : [[
-                {precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
-                {precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
-                {precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'}
+                {id:1,precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
+                {id:2,precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
+                {id:3,precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'}
             ],[
-                {precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
-                {precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'}
+                {id:4,precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'},
+                {id:5,precio:3,nombre:'algo',descript:'algo',img_url:'https://www.yoinfluyo.com/images/stories/hoy/jun19/260619/artesanias_p.jpg'}
             ]],
             ajax:[]
         }

@@ -30,15 +30,20 @@
     <body class="antialiased">
         <div id="app">
             <x-nav_bar/>
-            <x-catalogo/>
             <x-carrito/>
+            <x-catalogo/>
         </div>
     </body>
     <script>
         let csrf_token =  document.getElementById('csrf_token');
         if(csrf_token !== null) Vue.http.headers.common['X-CSRF-TOKEN'] = csrf_token.value;
         var app = new Vue({
-            el:'#app'
+            el:'#app',
+            methods:{
+                abrir_carrito(){
+                    this.$root.$emit('abrir');
+                }
+            }
         })
     </script>
 </html>
