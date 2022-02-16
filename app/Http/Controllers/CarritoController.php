@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class CarritoController extends Controller
 {
-    //
+    public function addCarrito(Type $var = null)
+    {
+        # code...
+    }
 }
