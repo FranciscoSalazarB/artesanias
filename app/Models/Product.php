@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Inventario;
-use App\Models\Foto;
+use App\Models\Pieza;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'unidadDeMedida',
         'eliminado',
@@ -17,12 +17,8 @@ class Product extends Model
         'marcaChiapas'
     ];
 
-    public function inventario()
+    public function piezas()
     {
-        return $this->hasOne(Inventario::class,'idProduct');
-    }
-    public function fotos()
-    {
-        return $this->hasMany(Foto::class,'idProduct');
+        return $this->hasMany(Pieza::class,'idProduct');
     }
 }

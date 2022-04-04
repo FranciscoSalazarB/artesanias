@@ -13,7 +13,7 @@ class CreateInventarioTable extends Migration
      */
     public function up()
     {
-        Schema::create('inventario', function (Blueprint $table) {
+        Schema::create('piezas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->float('precio');

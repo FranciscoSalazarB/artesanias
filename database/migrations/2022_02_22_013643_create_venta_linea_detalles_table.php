@@ -21,11 +21,11 @@ class CreateVentaLineaDetallesTable extends Migration
             $table->float('descuento');
             $table->timestamps();
             $table->unsignedBigInteger('idVenta')->unsigned();
-            $table->unsignedBigInteger('idInventario')->unsigned();
+            $table->unsignedBigInteger('idPieza')->unsigned();
         });
         Schema::table('venta_linea_detalles', function(Blueprint $table){
             $table->foreign('idVenta')->references('id')->on('venta_lineas');
-            $table->foreign('idInventario')->references('id')->on('inventario');
+            $table->foreign('idPieza')->references('id')->on('piezas');
         });
     }
 

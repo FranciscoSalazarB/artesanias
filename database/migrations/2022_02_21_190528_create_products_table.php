@@ -15,10 +15,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('unidadDeMedida');
+            $table->string('unidadDeMedida');
             $table->boolean('eliminado');
             $table->string('descripcion');
             $table->timestamps();
+            $table->unsignedBigInteger('idRubro');
+            $table->foreign('idRubro')->references('id')->on('rubros');
         });
     }
 

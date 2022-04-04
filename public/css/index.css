@@ -170,11 +170,16 @@ h1{
   align-items: center;
   justify-content: center;
   z-index: 9;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0;
   backdrop-filter: blur(3px);
 }
 .carrito_compras>.container{
   width: 60%;
   height: 60%;
+  max-height: calc(100% - 10px);
   border-radius: 1rem;
   padding: 1rem;
   display: flex;
@@ -183,6 +188,9 @@ h1{
   flex-direction: column;
   background-color: #282a2b;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.container>.headCarrito{
+  
 }
 .cerrar_carrito{
   position: relative;
