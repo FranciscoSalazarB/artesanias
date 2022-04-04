@@ -1,10 +1,10 @@
 <catalogo inline-template>
-    <div>
+    <div id="catalogoContainer">
         <input type="hidden" id="csrf_token" value="{{ csrf_token() }}"/>
         <input type="hidden" id="rute" value="{{route('artesanias')}}"/>
         <div class="catalogoHeader">
-            <h1>Casa de las artesanías</h1>
             <h2>Recorrido virtual</h2>
+            
         </div>
         <div class="preloader" v-if="piezas.length === 0">
             <div class="lds-roller">

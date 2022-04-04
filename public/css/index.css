@@ -104,10 +104,23 @@ h1{
     background-color: white;
     color: #282a2b;
 }
+#catalogoContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.catalogoHeader{
+  margin-top: 80px;
+  width: 100%;
+  text-align: center;
+}
+#logoCatalogo{
+  color: black;
+}
 .catalogo{
   min-width: 100%;
   min-height: 100vh;
-  padding-top: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,9 +201,6 @@ h1{
   flex-direction: column;
   background-color: #282a2b;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-}
-.container>.headCarrito{
-  
 }
 .cerrar_carrito{
   position: relative;
