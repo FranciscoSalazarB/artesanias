@@ -13,7 +13,7 @@ class CreateVentaLineaDetallesTable extends Migration
      */
     public function up()
     {
-        Schema::create('venta_linea_detalles', function (Blueprint $table) {
+        Schema::create('carrito_detalle', function (Blueprint $table) {
             $table->id();
             $table->float('precioVenta');
             $table->bigInteger('porcentajeDescuento');
@@ -24,8 +24,8 @@ class CreateVentaLineaDetallesTable extends Migration
             $table->unsignedBigInteger('idPieza')->unsigned();
         });
         Schema::table('venta_linea_detalles', function(Blueprint $table){
-            $table->foreign('idVenta')->references('id')->on('venta_lineas');
-            $table->foreign('idPieza')->references('id')->on('piezas');
+            $table->foreign('idCarrito')->references('id')->on('carrito');
+            $table->foreign('idPieza')->references('id')->on('pieza');
         });
     }
 

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRamasTable extends Migration
+class Celular extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRamasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rama', function (Blueprint $table) {
+        Schema::create('celular', function (Blueprint $table){
             $table->id();
-            $table->string('rama');
-            $table->boolean('eliminado');
-            $table->timestamps();
+            $table->string('numero');
+            
         });
     }
 
@@ -28,6 +27,6 @@ class CreateRamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ramas');
+        //
     }
 }

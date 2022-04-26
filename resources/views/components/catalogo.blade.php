@@ -3,8 +3,10 @@
         <input type="hidden" id="csrf_token" value="{{ csrf_token() }}"/>
         <input type="hidden" id="rute" value="{{route('artesanias')}}"/>
         <div class="catalogoHeader">
-            <h2>Recorrido virtual</h2>
-            
+            <h2>Visita nuestro recorrido virtual <a href="#" class="button_card">Ver más</a> </h2>
+            <div>
+                
+            </div>
         </div>
         <div class="preloader" v-if="piezas.length === 0">
             <div class="lds-roller">

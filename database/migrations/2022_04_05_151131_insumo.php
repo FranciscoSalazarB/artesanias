@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRamasTable extends Migration
+class Insumo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,7 @@ class CreateRamasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rama', function (Blueprint $table) {
-            $table->id();
-            $table->string('rama');
-            $table->boolean('eliminado');
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -28,6 +23,6 @@ class CreateRamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ramas');
+        //
     }
 }

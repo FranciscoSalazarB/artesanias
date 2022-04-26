@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRamasTable extends Migration
+class Destino extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateRamasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rama', function (Blueprint $table) {
+        Schema::create('destino', function (Blueprint $table){
             $table->id();
-            $table->string('rama');
-            $table->boolean('eliminado');
-            $table->timestamps();
+            $table->string('direccion');
+            $table->string('gps');
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('user');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateRamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ramas');
+        //
     }
 }
