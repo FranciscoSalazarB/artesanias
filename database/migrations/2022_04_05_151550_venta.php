@@ -13,7 +13,14 @@ class Venta extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('venta', function (Blueprint $table){
+            $table->id();
+            $table->date('fechaPago');
+            $table->string('metodoPago');
+            $table->string('estadoActual');
+            $table->unsignedBigInteger('idCarrito');
+            $table->foreign('idCarrito')->references('id')->on('carrito');
+        });
     }
 
     /**

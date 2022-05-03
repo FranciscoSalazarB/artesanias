@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rubro extends Model
 {
     use HasFactory;
+    protected $table = 'rubro';
     protected $fillable = [
         'rubro',
         'eliminado'

@@ -13,7 +13,11 @@ class Insumo extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('insumo', function (Blueprint $table){
+            $table->id();
+            $table->string('concepto');
+            $table->string('unidadMedida');
+        });
     }
 
     /**

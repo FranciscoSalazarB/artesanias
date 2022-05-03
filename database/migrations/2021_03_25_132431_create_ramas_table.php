@@ -28,6 +28,6 @@ class CreateRamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ramas');
+        Schema::dropIfExists('rama');
     }
 }

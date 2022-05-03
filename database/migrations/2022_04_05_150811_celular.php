@@ -16,7 +16,8 @@ class Celular extends Migration
         Schema::create('celular', function (Blueprint $table){
             $table->id();
             $table->string('numero');
-            
+            $table->unsignedBigInteger('idUser');
+            $table->foreign('idUser')->references('id')->on('user');
         });
     }
 

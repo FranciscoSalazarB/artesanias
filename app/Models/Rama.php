@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Rama extends Model
 {
     use HasFactory;
+    protected $table = 'rama';
     protected $fillable = [
         'rama',
         'eliminado'

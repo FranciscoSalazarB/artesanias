@@ -13,7 +13,14 @@ class EstadoActual extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('estado_actual', function (Blueprint $table){
+            $table->id();
+            $table->string('estadoNombre');
+            $table->date('fecha');
+            $table->boolean('activo');
+            $table->unsignedBigInteger('idVenta');
+            $table->foreign('idVenta')->references('id')->on('venta');
+        });
     }
 
     /**

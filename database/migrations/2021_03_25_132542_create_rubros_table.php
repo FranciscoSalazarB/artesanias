@@ -30,6 +30,6 @@ class CreateRubrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rubros');
+        Schema::dropIfExists('rubro');
     }
 }

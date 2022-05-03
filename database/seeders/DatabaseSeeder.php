@@ -113,13 +113,13 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'playera color rojo tejido de rombos',
             'precio'=>125,
             'codigoAlterno'=>'qwertyuiop',
-            'idProduct'=>$playeraHombre->id,
+            'idProducto'=>$playeraHombre->id,
         ]);
         $playera2 = Pieza::create([
             'nombre'=>'playera multicolor tejido de rombos',
             'precio'=>120,
             'codigoAlterno'=>'qwertyuiop',
-            'idProduct'=>$playeraHombre->id,
+            'idProducto'=>$playeraHombre->id,
         ]);
         //fotos
         Foto::create([

@@ -13,7 +13,18 @@ class InsumoDetalle extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('insumo_detalle', function (Blueprint $table){
+            $table->id();
+            $table->float('cantidadUsada');
+            $table->string('unidadMedida');
+            $table->unsignedBigInteger('idCarritoDetalle')->unsigned();
+            $table->unsignedBigInteger('idHistorico')->unsigned();
+        });
+
+        Schema::table('insumo_detalle', function(Blueprint $table){
+            $table->foreign('idCarritoDetalle')->references('id')->on('carrito_detalle');
+            $table->foreign('idHistorico')->references('id')->on('historico_precio');
+        });
     }
 
     /**

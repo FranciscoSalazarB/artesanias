@@ -11,7 +11,7 @@ use App\Models\Foto;
 class Pieza extends Model
 {
     use HasFactory;
-    protected $table = 'piezas';
+    protected $table = 'pieza';
     protected $fillable = [
         'nombre',
         'precio',
@@ -21,7 +21,7 @@ class Pieza extends Model
     ];
     public function producto()
     {
-        return $this->hasManybelongsTo(Product::class,'idProduct');
+        return $this->hasManybelongsTo(Product::class,'idProducto');
     }
     public function fotos()
     {
