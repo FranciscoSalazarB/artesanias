@@ -118,10 +118,10 @@ h1{
 .catalogo{
   min-width: 100%;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }
 .card_container{
   width: 85%;
@@ -228,6 +228,10 @@ h1{
   padding: .5rem;
   margin: 1rem;
   background-color: white;
+}
+#recorridoVirtual{
+  width: auto;
+  height: 200px;
 }
 /*Animación de carga de las artesanías*/
 .preloader{
