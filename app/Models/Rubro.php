@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Rama;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,4 +15,12 @@ class Rubro extends Model
         'eliminado'
     ];
     
+    public function productos()
+    {
+        return $this->hasMany(Product::class,'idRubro');
+    }
+    public function rama()
+    {
+        return $this->hasManybelongsTo(Rama::class,'idRama');
+    }
 }

@@ -4,7 +4,8 @@
         <li><a href="https://www.casadelasartesaniaschiapas.gob.mx/#gsc.tab=0" class="button">PáginaPrincipal</a></li>
         @auth
             <a href="#" class="button" v-on:click="abrir_carrito">Carrito</a>
-            <a href="{{ url('/dashboard') }}" class="button">Dashboard</a>
+            <a href="{{ url('/dashboard') }}" class="button">Panel de Control
+            </a>
         @else
             @if(Route::currentRouteName() == "login")
                 <a href="{{ route('/') }}" class="button">Catálogo</a>

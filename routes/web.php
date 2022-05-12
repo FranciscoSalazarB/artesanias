@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtesaniasController;
+use App\Http\Controllers\CatalogoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,5 +22,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('artesanias');
+Route::post('/ramas',function(){
+    return json('hola');
+})->name('ramasGet');
+Route::post('/rubros',[CatalogoController::class,'getRubros'])->name('rubrosGet');
 
 require __DIR__.'/auth.php';

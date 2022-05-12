@@ -9,8 +9,6 @@ use App\Models\Rubro;
 use App\Models\Foto;
 use App\Models\Pieza;
 use App\Models\Product;
-use App\Models\VentaLinea;
-use App\Models\VentaLineaDetalle;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -24,14 +22,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //usuarios
-        User::create([
-            'name'=>'user',
-            'email'=>'algo@gmail.com',
-            'roll'=>'cliente',
-            'password'=>Hash::make('password')
-        ]);
-
         //Ramas
         $textiles = Rama::create([
             'rama'=>'textiles',
@@ -119,8 +109,27 @@ class DatabaseSeeder extends Seeder
             'nombre'=>'playera multicolor tejido de rombos',
             'precio'=>120,
             'codigoAlterno'=>'qwertyuiop',
-            'idProducto'=>$playeraHombre->id,
+            'idProducto'=>$playeraMujer->id,
         ]);
+        $playera3 = Pieza::create([
+            'nombre'=>'playera azul, franja de rombos',
+            'precio'=>100,
+            'codigoAlterno'=>'qwerrtyiop',
+            'idProducto'=>$playeraHombre->id
+        ]);
+        $playera4 = Pieza::create([
+            'nombre'=>'playera negra floreada',
+            'precio'=>200,
+            'codigoAlterno'=>'asdfghjkl',
+            'idProducto'=>$playeraMujer->id
+        ]);
+        $playera5 = Pieza::create([
+            'nombre'=>'playera negra calabera',
+            'precio'=>240,
+            'codigoAlterno'=>'asdfghjkl',
+            'idProducto'=>$playeraNiño->id
+        ]);
+
         //fotos
         Foto::create([
             'nombreArchivo'=>'041ebb62-bd82-49f3-92cc-afa7deef907b_nube-157b55c5cd2b1e04ca16147021134732-1024-1024.jpg',
@@ -133,6 +142,24 @@ class DatabaseSeeder extends Seeder
             'url'=>'https://http2.mlstatic.com/',
             'eliminado'=>FALSE,
             'idPieza'=>$playera2->id
+        ]);
+        Foto::create([
+            'nombreArchivo'=>'IMG_20200611_143250-removebg-preview.png',
+            'url'=>'https://hechoalamexicana.com/wp-content/uploads/2020/06/',
+            'eliminado'=>FALSE,
+            'idPieza'=>$playera3->id
+        ]);
+        Foto::create([
+            'nombreArchivo'=>'blusa-negra-dama-flores-colores.jpg',
+            'url'=>'https://tienda.hechoenveracruz.gob.mx/wp-content/uploads/2021/10/',
+            'eliminado'=>FALSE,
+            'idPieza'=>$playera4->id
+        ]);
+        Foto::create([
+            'nombreArchivo'=>'D_NQ_NP_799814-MLM47534347845_092021-O.jpg',
+            'url'=>'https://http2.mlstatic.com/',
+            'eliminado'=>FALSE,
+            'idPieza'=>$playera5->id
         ]);
     }
 }
