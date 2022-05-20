@@ -22,11 +22,11 @@ Vue.component('almacen',{
         this.urls.piezas = document.getElementById('urlPiezas').value;
         try {
             this.ramas = await this.$http.post(this.urls.ramas);
+            this.ramas = this.ramas.body;
             this.rubros = await this.$http.post(this.urls.rubros);
+            this.rubros = this.rubros.body;
             this.productos = await this.$http.post(this.urls.productos);
             this.piezas = await this.$http.post(this.urls.piezas);
-            this.ramas = this.ramas.body;
-            this.rubros = this.rubros.body;
             this.piezas = this.piezas.body;
             this.productos = this.productos.body;
         } catch (error) {

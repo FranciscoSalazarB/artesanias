@@ -5,9 +5,13 @@ Vue.component('artesania',{
     data(){
         return {apartado:false};
     },
-    mounted(){
-        this.$root.$on('removeCarr',(id)=>{
+    async mounted(){
+        const rutaEmitir = "esta"+this.artesania_atributes.id;
+        await this.$root.$on('removeCarr',(id)=>{
             if(this.artesania_atributes.id == id) this.remover()
+        });
+        this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
+            this.apartado = res;
         });
     },
     methods:{

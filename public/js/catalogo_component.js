@@ -8,8 +8,7 @@ Vue.component('catalogo',{
         const url = document.getElementById('rute').value;
         try {
             this.piezas = await this.$http.post(url);
-            this.piezas = this.piezas.body
-            console.log(this.piezas);
+            this.piezas = this.piezas.body;
         } catch (error) {
             console.log(error);
         }

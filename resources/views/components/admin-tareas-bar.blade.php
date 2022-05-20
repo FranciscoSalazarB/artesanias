@@ -2,7 +2,7 @@
     <form action="#">
         <label>
             <input v-model="picked" type="radio" name="observable" value="pedidos" checked >
-            <span>Pedidos</span>
+            <span>Solicitudes de entrega</span>
         </label>
         <label>
             <input v-model="picked" type="radio" name="observable" value="almacen">

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtesaniasController;
 use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\CarritoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('artesanias');
-Route::post('/ramas',function(){
-    return json('hola');
-})->name('ramasGet');
+Route::post('/ramas',[CatalogoController::class,'getRamas'])->name('ramasGet');
 Route::post('/rubros',[CatalogoController::class,'getRubros'])->name('rubrosGet');
+Route::post('/productos',[CatalogoController::class,'getProductos'])->name('productosGet');
+Route::post('/piezas',[CatalogoController::class,'getPiezas'])->name('piezasGet');
+Route::post('/carrito/getPiezas',[CarritoController::class,'getCarrito'])->name('carritoGet');
+Route::post('/carrito/addPieza',[CarritoController::class,'addToCarrito'])->name('carritoAdd');
+Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->name('carritoRemove');
 
 require __DIR__.'/auth.php';

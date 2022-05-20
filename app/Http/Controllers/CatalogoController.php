@@ -1,16 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Rama;
 use App\Models\Rubro;
 use App\Models\Product;
+use App\Models\Pieza;
+use App\Models\Foto;
 
-class CatalogogoController extends Controller
+
+
+class CatalogoController extends Controller
 {
     public function getRamas()
     {
-        return json("Rama::all()");
+        return response()->json(Rama::all());
     }
     public function addRama(Request $req)
     {
@@ -35,7 +40,7 @@ class CatalogogoController extends Controller
     #Sección rubro
     public function getRubros()
     {
-        return Rubro::all();
+        return response()->json(Rubro::all());
     }
     public function addRubro(Request $req)
     {
@@ -60,7 +65,7 @@ class CatalogogoController extends Controller
     #Sección productos
     public function getProductos()
     {
-        return Product::all();
+        return response()->json(Product::all());
     }
     public function addProducto(Request $req)
     {
@@ -80,5 +85,17 @@ class CatalogogoController extends Controller
         $rubroDel = Rubro::find($id);
         $rubroDel->eliminado = TRUE;
         $rubroDel->save();
+    }
+
+    #piezas
+    public function getPiezas()
+    {
+        return response()->json(Pieza::all());
+    }
+
+    #Fotos
+    public function getFotos()
+    {
+        return response()->json(Foto::all());
     }
 }
