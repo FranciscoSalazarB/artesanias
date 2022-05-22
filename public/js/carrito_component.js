@@ -15,7 +15,6 @@ Vue.component('carrito',{
         const rutaGet = document.getElementById('getCarrito').value;
         const response = await this.$http.post(rutaGet);
         this.seleccionados = await response.body;
-        console.log(this.seleccionados);
     },
     methods:{
         buscarPieza(idPieza, callback){

@@ -26,7 +26,7 @@ Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('a
 Route::post('/ramas',[CatalogoController::class,'getRamas'])->name('ramasGet');
 Route::post('/rubros',[CatalogoController::class,'getRubros'])->name('rubrosGet');
 Route::post('/productos',[CatalogoController::class,'getProductos'])->name('productosGet');
-Route::post('/piezas',[CatalogoController::class,'getPiezas'])->name('piezasGet');
+Route::post('/piezas',[ArtesaniasController::class,'sendArtesanias'])->name('piezasGet');
 Route::post('/carrito/getPiezas',[CarritoController::class,'getCarrito'])->name('carritoGet');
 Route::post('/carrito/addPieza',[CarritoController::class,'addToCarrito'])->name('carritoAdd');
 Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->name('carritoRemove');

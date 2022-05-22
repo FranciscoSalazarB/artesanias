@@ -27,19 +27,56 @@
                             <input v-model="select" type="radio" name="almacen" value="piezas">
                             <span>Piezas</span>
                         </label>
-                        <label>
-                            <input v-model="select" type="radio" name="almacen" value="fotos">
-                            <span>Fotos</span>
-                        </label>
                     </form>
                 </div>
                 <div>
                     <div v-if="select == 'ramas'">
-                        <div v-for="rama in ramas" class="rama">
-                            @{{rama.rama}}
+                        <div v-for="rama in ramas">
+                            <input type="text" v-model="rama.rama">
+                            <button>Editar</button>
+                            <button>Eliminar</button>
                         </div>
                         <div>
-                            add rama
+                            <input type="text">
+                            <button>Agregar nueva rama</button>
+                        </div>
+                    </div>
+                    <div v-if="select == 'rubros'">
+                        <div v-for="rubro in rubros">
+                            <input type="text" v-model="rubro.rubro">
+                            <p>rama : @{{findRama(rubro.idRama).rama}}</p>
+                        </div>
+                        <div>
+                            <input type="text">
+                            <select>
+                                <option value="rama.value" v-for="rama in ramas">@{{rama.rama}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div v-if="select == 'productos'">
+                        <div v-for="producto in productos">
+                            <input type="text" v-model="producto.descripcion">
+                            <input type="text" v-model="producto.unidadDeMedida">
+                            <p>Rubro : @{{findRubro(producto.idRubro).rubro}}</p>
+                        </div>
+                        <div>
+                            <input type="text">
+                            <input type="text">
+                            <select>
+                                <option value="rubro.value" v-for="rubro in rubros">@{{rubro.rubro}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div v-if="select == 'piezas'">
+                        <div v-for="pieza in piezas">
+                            <input type="text" v-model="pieza.nombre">
+                            <input type="number" v-model="pieza.precio">
+                            <input type="text" v-model="pieza.codigoAlterno">
+                            <p>Producto : @{{findProducto(pieza.idProducto).descripcion}}</p>
+                            <img :src="foto.url + foto.nombreArchivo" v-for="foto in pieza.fotos">
+                        </div>
+                        <div>
+                            add pieza
                         </div>
                     </div>
                 </div>

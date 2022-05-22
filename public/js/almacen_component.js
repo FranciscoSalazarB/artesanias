@@ -32,5 +32,25 @@ Vue.component('almacen',{
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    methods:{
+        findRama(idRama){
+            const rama = this.ramas.find(rama=>{
+                return rama.id == idRama;
+            });
+            return rama;
+        },
+        findRubro(idRubro){
+            const rubro = this.rubros.find(rubro=>{
+                return rubro.id == idRubro;
+            });
+            return rubro;
+        },
+        findProducto(idProducto){
+            const Producto = this.productos.find(Producto=>{
+                return Producto.id == idProducto;
+            });
+            return Producto;
+        }
+    },
 });
