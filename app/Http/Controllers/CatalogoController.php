@@ -21,19 +21,21 @@ class CatalogoController extends Controller
     {
         $newRama = new Rama;
         $newRama->rama = $req->input('rama');
+        $newRama->eliminado = false;
         $newRama->save(); 
     }
-    public function editRama(Request $req, $id)
+    public function editRama(Request $req)
     {
-        $ramaEdit = Rama::find($id);
+        $ramaEdit = Rama::find($req->input('id'));
         $ramaEdit->rama = $req->input('rama');
         $ramaEdit->save();
     }
-    public function delRama($id)
+    public function delRama(Request $req)
     {
-        $ramaDel = Rama::find($id);
-        $ramaDel->eliminado = TRUE;
-        $ramaDel->save();
+        return response()->json($req);
+        #$ramaDel = Rama::find($req->input('id'));
+        #$ramaDel->eliminado = TRUE;
+        #$ramaDel->save();
     }
 
 
@@ -47,11 +49,12 @@ class CatalogoController extends Controller
         $newRubro = new Rubro;
         $newRubro->rubro = $req->input('rubro');
         $newRubro->idRama = $req->input('idRama');
+        $newRubro->eliminado = FALSE;
         $newRubro->save();
     }
-    public function editRubro(Request $req, $id)
+    public function editRubro(Request $req)
     {
-        $rubroEdit = Rubro::find($id);
+        $rubroEdit = Rubro::find($req->input('id'));
         $rubroEdit->rubro = $req->input('rubro');
         $rubroEdit->save();
     }
@@ -69,15 +72,18 @@ class CatalogoController extends Controller
     }
     public function addProducto(Request $req)
     {
-        $newRubro = new Rubro;
-        $newRubro->rubro = $req->input('rubro');
-        $newRubro->idRama = $req->input('idRama');
-        $newRubro->save();
+        $newProducto = new Product;
+        $newProducto->descripcion = $req->input('descripcion');
+        $newProducto->unidadDeMedida = $req->input('unidadDeMedida');
+        $newProducto->idRubro = $req->input('idRubro');
+        $newProducto->eliminado = FALSE;
+        $newProducto->save();
     }
-    public function editProducto(Request $req, $id)
+    public function editProducto(Request $req)
     {
-        $rubroEdit = Rubro::find($id);
-        $rubroEdit->rubro = $req->input('rubro');
+        $rubroEdit = Product::find($req->input('id'));
+        $rubroEdit->descripcion = $req->input('descripcion');
+        $rubroEdit->unidadDeMedida = $req->input('unidadDeMedida');
         $rubroEdit->save();
     }
     public function delProducto($id)
@@ -86,16 +92,21 @@ class CatalogoController extends Controller
         $rubroDel->eliminado = TRUE;
         $rubroDel->save();
     }
-
-    #piezas
-    public function getPiezas()
+    public function addPieza(Request $req)
     {
-        return response()->json(Pieza::all());
+       $newPieza = new Pieza;
+       $newPieza->nombre = $req->input('nombre');
+       $newPieza->precio = $req->input('precio');
+       $newPieza->codigoAlterno = $req->input('codigoAlterno');
+       $newPieza->idProducto = $req->input('idProducto');
+       $newPieza->save();
     }
-
-    #Fotos
-    public function getFotos()
+    public function editPieza(Request $req)
     {
-        return response()->json(Foto::all());
+       $pieza = Pieza::find($req->input('id'));
+       $pieza->nombre = $req->input('nombre');
+       $pieza->precio = $req->input('precio');
+       $pieza->codigoAlterno = $req->input('codigoAlterno');
+       $pieza->save();
     }
 }
