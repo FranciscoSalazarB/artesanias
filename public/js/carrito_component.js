@@ -30,18 +30,20 @@ Vue.component('carrito',{
             this.activo = true;
         },
         async agregar(data){
-            this.seleccionados.push(data);
-            const pieza = {idPieza:data.id};
+            console.log(data);
+            this.seleccionados.push(data.pieza);
+            console.log(this.seleccionados);
+            const pieza = {idPieza:data.pieza.id};
             var response = await this.$http.post(this.rutas.addPieza,pieza);
-            console.log(response);
         },
         async remover(index){
+            console.log(this.seleccionados)
             const artesania = this.seleccionados[index];
+            console.log(artesania);
             this.seleccionados.splice(index,1);
             this.$root.$emit('removeCarr',artesania.id);
             const pieza = {idPieza:artesania.id};
-            const res = await this.$http.post(this.rutas.removePieza,pieza); 
-            console.log(res);
+            const res = await this.$http.post(this.rutas.removePieza,pieza);
         }
     }
 })

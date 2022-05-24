@@ -6,12 +6,10 @@ Vue.component('artesania',{
         return {apartado:false};
     },
     async mounted(){
-        const rutaEmitir = "esta"+this.artesania_atributes.id;
-        console.log(this.artesania_atributes);
         await this.$root.$on('removeCarr',(id)=>{
-            if(this.artesania_atributes.id == id) this.remover()
+            if(this.artesania_atributes.pieza.id == id) this.remover()
         });
-        this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
+        this.$root.$emit('estoyEnCarrito',this.artesania_atributes.pieza.id, (res)=>{
             this.apartado = res;
         });
     },
