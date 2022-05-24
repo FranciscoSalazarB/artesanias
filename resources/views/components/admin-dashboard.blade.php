@@ -27,6 +27,10 @@
                             <input v-model="select" type="radio" name="almacen" value="piezas">
                             <span>Piezas</span>
                         </label>
+                        <label>
+                            <input v-model="select" type="radio" name="almacen" value="fotos">
+                            <span>Fotos</span>
+                        </label>
                     </form>
                 </div>
                 <div>

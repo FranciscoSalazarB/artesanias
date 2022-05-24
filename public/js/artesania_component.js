@@ -7,6 +7,7 @@ Vue.component('artesania',{
     },
     async mounted(){
         const rutaEmitir = "esta"+this.artesania_atributes.id;
+        console.log(this.artesania_atributes);
         await this.$root.$on('removeCarr',(id)=>{
             if(this.artesania_atributes.id == id) this.remover()
         });

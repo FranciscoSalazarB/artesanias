@@ -112,14 +112,23 @@ h1{
 }
 .catalogoHeader{
   margin-top: 80px;
-  width: 100%;
-  height: auto;
-  font-size: 1.5rem;
+  width: 70%;
+  height: 50vh;
+  font-size: 1.8rem;
+  color: white;
   text-align: center;
-  background-image: url('https://elorbe.com//archivos_data/2021/02/ARTESANIAS-2.jpg" id="recorridoVirtual');
+  background-image: url('https://elorbe.com//archivos_data/2021/02/ARTESANIAS-2.jpg');
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: rgb(14, 21, 29) 0px 20px 30px -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.catalogoHeader>div{
+  background-color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
 }
 .catalogo{
   min-width: 100%;
@@ -128,6 +137,22 @@ h1{
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
+}
+.caltalogoSelectContainer{
+  margin-top: 1rem;
+  font-size: 1.75rem;
+  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.caltalogoSelect{
+  width: 100%;
+  border-bottom: #282a2b solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.caltalogoSelect>label{
+  margin: 0.75rem;
 }
 .card_container{
   width: 85%;
@@ -152,6 +177,11 @@ h1{
 }
 .artesania_card{
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 .artesania_card>img{
   max-width: 20rem;

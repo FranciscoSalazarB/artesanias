@@ -22,7 +22,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('artesanias');
+Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('catalogo');
+Route::post('/catalogo/ramas',[ArtesaniasController::class,'sendRamas']);
+Route::post('/catalogo/piezasInRubro',[ArtesaniasController::class,'piezasInRubro']);
 Route::post('/ramas',[CatalogoController::class,'getRamas'])->name('ramasGet');
 Route::post('/ramas/add',[CatalogoController::class,'addRama']);
 Route::post('/ramas/del',[CatalogoController::class,'delRama']);
