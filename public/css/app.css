@@ -1374,3 +1374,9 @@ select {
   }
 }
 
+.eliminado{
+  background-color: #f00;
+}
+.activo{
+  background-color: #fff;
+}

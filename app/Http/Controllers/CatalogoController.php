@@ -32,14 +32,17 @@ class CatalogoController extends Controller
     }
     public function delRama(Request $req)
     {
-        return response()->json($req);
-        #$ramaDel = Rama::find($req->input('id'));
-        #$ramaDel->eliminado = TRUE;
-        #$ramaDel->save();
+        $ramaDel = Rama::find($req->input('id'));
+        $ramaDel->eliminado = TRUE;
+        $ramaDel->save();
+        foreach($ramaDel->rubros as $rubroDel)
+        {
+            $this->delRubro($rubroDel->id);
+        }
+        unset($rubroDel);
     }
 
-
-    #Sección rubro
+    #Sección rubro--------------------------------------------------------------------
     public function getRubros()
     {
         return response()->json(Rubro::all());
@@ -63,9 +66,14 @@ class CatalogoController extends Controller
         $rubroDel = Rubro::find($id);
         $rubroDel->eliminado = TRUE;
         $rubroDel->save();
+        foreach($rubroDel->productos as $productoDel)
+        {
+            $this->delProducto($productoDel->id);
+        }
+        unset($productoDel);
     }
 
-    #Sección productos
+    #Sección productos---------------------------------------------------------------------
     public function getProductos()
     {
         return response()->json(Product::all());
@@ -88,9 +96,32 @@ class CatalogoController extends Controller
     }
     public function delProducto($id)
     {
-        $rubroDel = Rubro::find($id);
-        $rubroDel->eliminado = TRUE;
-        $rubroDel->save();
+        $productoDel = Product::find($id);
+        $productoDel->eliminado = TRUE;
+        $productoDel->save();
+        foreach($productoDel->piezas as $piezaDel)
+        {
+            $this->delPieza($piezaDel->id);
+        }
+        unset($piezaDel);
+    }
+
+
+    #sección de artezanías/piezas-----------------------------------------------------------------
+    public function getPiezas()
+    {
+        $piezas = Pieza::all();
+        if (true === ( isset( $my_var ) ? $my_var : null )) {
+            return response()->json(["error"=>"no hay piezas"]);
+        }
+        else{
+            foreach($piezas as $pieza){
+                $img = $pieza->fotos;
+                $pieza = array("pieza"=>$pieza,"fotos"=>$img);
+            }
+            unset($pieza);
+            return response()->json($piezas);
+        }
     }
     public function addPieza(Request $req)
     {
@@ -108,5 +139,11 @@ class CatalogoController extends Controller
        $pieza->precio = $req->input('precio');
        $pieza->codigoAlterno = $req->input('codigoAlterno');
        $pieza->save();
+    }
+    public function delPieza($id)
+    {
+        $piezaDel = Pieza::find($id);
+        $piezaDel->estatus = "eliminado";
+        $piezaDel->save();
     }
 }

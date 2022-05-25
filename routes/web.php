@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtesaniasController;
 use App\Http\Controllers\CatalogoController;
@@ -32,12 +32,21 @@ Route::post('/ramas/edit',[CatalogoController::class,'editRama']);
 Route::post('/rubros',[CatalogoController::class,'getRubros'])->name('rubrosGet');
 Route::post('/rubros/add',[CatalogoController::class,'addRubro']);
 Route::post('/rubros/edit',[CatalogoController::class,'editRubro']);
+Route::post('/rubros/del', function (Request $req){
+    app(CatalogoController::class)->delRubro($req->input('id'));
+});
 Route::post('/productos',[CatalogoController::class,'getProductos'])->name('productosGet');
 Route::post('/productos/add',[CatalogoController::class,'addProducto']);
 Route::post('/productos/edit',[CatalogoController::class,'editProducto']);
-Route::post('/piezas',[ArtesaniasController::class,'sendArtesanias'])->name('piezasGet');
+Route::post('/productos/del', function(Request $req){
+    app(CatalogoController::class)->delProducto($req->input('id'));
+});
+Route::post('/piezas',[CatalogoController::class,'getPiezas'])->name('piezasGet');
 Route::post('/piezas/add',[CatalogoController::class,'addPieza']);
 Route::post('/piezas/edit',[CatalogoController::class,'editPieza']);
+Route::post('/piezas/del',function (Request $req){
+    app(CatalogoController::class)->delPieza($req->input('id'));
+});
 Route::post('/carrito/getPiezas',[CarritoController::class,'getCarrito'])->name('carritoGet');
 Route::post('/carrito/addPieza',[CarritoController::class,'addToCarrito'])->name('carritoAdd');
 Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->name('carritoRemove');

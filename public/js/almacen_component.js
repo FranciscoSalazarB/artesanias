@@ -71,40 +71,39 @@ Vue.component('almacen',{
             return Producto;
         },
         async addRama(){
-            const res = await this.$http.post(this.urls.ramas+"/add",this.newRama);
-            console.log(res);
+            await this.$http.post(this.urls.ramas+"/add",this.newRama);
         },
         async delRama(rama){
-            const res = await this.$http.post(this.urls.ramas+"/del",rama);
-            console.log(res);
+            await this.$http.post(this.urls.ramas+"/del",rama);
         },
-        async editRama(rama){
-            const res = await this.$http.post(this.urls.ramas+"/edit",rama);
-            console.log(res);
+        async editRama(rama){await this.$http.post(this.urls.ramas+"/edit",rama);
         },
         async addRubro(){
-            const res = await this.$http.post(this.urls.rubros+"/add",this.newRubro);
-            console.log(res);
+            await this.$http.post(this.urls.rubros+"/add",this.newRubro);
         },
         async editRubro(rubro){
-            const res = await this.$http.post(this.urls.rubros+"/edit",rubro);
-            console.log(res);
+            await this.$http.post(this.urls.rubros+"/edit",rubro);
+        },
+        async delRubro(rubro){
+            await this.$http.post(this.urls.rubros+'/del',rubro);
         },
         async addProducto(){
-            const res = await this.$http.post(this.urls.productos+"/add",this.newProducto);
-            console.log(res);
+            await this.$http.post(this.urls.productos+"/add",this.newProducto);
         },
         async editProducto(producto){
-            const res = await this.$http.post(this.urls.productos+"/edit",producto);
-            console.log(res);
+            await this.$http.post(this.urls.productos+"/edit",producto);
+        },
+        async delProducto(producto){
+            await this.$http.post(this.urls.productos+"/del",producto);
         },
         async addPieza(){
-            const res = await this.$http.post(this.urls.piezas+"/add",this.newPieza);
-            console.log(res);
+            await this.$http.post(this.urls.piezas+"/add",this.newPieza);
         },
         async editPieza(pieza){
-            const res = await this.$http.post(this.urls.piezas+"/edit",pieza);
-            console.log(res);
+            await this.$http.post(this.urls.piezas+"/edit",pieza);
+        },
+        async delPieza(pieza){
+            await this.$http.post(this.urls.piezas+"/del",pieza);
         }
     },
 });

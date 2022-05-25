@@ -18,6 +18,7 @@ class CreatePiezaTable extends Migration
             $table->string('nombre');
             $table->float('precio');
             $table->string('codigoAlterno');
+            $table->string('estatus')->default('activo');
             $table->unsignedBigInteger('idProducto');
             $table->foreign('idProducto')->references('id')->on('producto');
             $table->timestamps();
