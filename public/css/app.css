@@ -351,7 +351,6 @@ iframe,
 embed,
 object {
   display: block; /* 1 */
-  vertical-align: middle; /* 2 */
 }
 
 /*
@@ -431,8 +430,6 @@ select {
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
-  -webkit-print-color-adjust: exact;
-          color-adjust: exact;
 }
 
 [multiple] {
@@ -441,8 +438,6 @@ select {
   background-repeat: unset;
   background-size: initial;
   padding-right: 0.75rem;
-  -webkit-print-color-adjust: unset;
-          color-adjust: unset;
 }
 
 [type='checkbox'],[type='radio'] {
@@ -450,8 +445,6 @@ select {
      -moz-appearance: none;
           appearance: none;
   padding: 0;
-  -webkit-print-color-adjust: exact;
-          color-adjust: exact;
   display: inline-block;
   vertical-align: middle;
   background-origin: border-box;
@@ -1375,8 +1368,76 @@ select {
 }
 
 .eliminado{
-  background-color: #f00;
+  background-color: #f00 !important;
 }
 .activo{
   background-color: #fff;
+}
+
+.crudContainer{
+  display: flex;
+  background-color: #fff;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  transition: background-color 1s ease;
+
+}
+.crudContainer:hover{
+  background-color: #ccc;
+}
+.crudContainer button{
+  margin-left: 0.5rem;
+}
+.crudContainer div {
+  display: flex;
+  align-items: center;
+}
+.almacenBody{
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+.almacenBody input,select{
+  border: none;
+  border-bottom: solid 1px;
+  background: transparent;
+  transition: border-bottom 1s ease;
+}
+.almacenBody input:focus,select:focus{
+  border: none;
+  box-shadow: none;
+  border-bottom: solid 1px #f00;
+}
+.almacenBody button{
+  background-color: #282a2b;
+  font-size: 1rem;
+  color: #fff;
+  padding: 0.25rem;
+  border-radius: 3px;
+}
+.almacenBody img,.imgAdd{
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin-right: 0.5rem;
+  background-color: #ccc;
+}
+.imgAdd label{
+  position: relative; 
+  font-size: 1rem;
+}
+.imgAdd input{
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin: 0;
+  opacity: 0;
+  outline: 0 none;
+  padding: 0;
+}
+.imgContainer{
+  display: flex;
+  flex-direction: row;
 }

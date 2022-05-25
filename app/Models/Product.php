@@ -24,6 +24,6 @@ class Product extends Model
     }
     public function rubro()
     {
-        return $this->hasManybelongsTo(Rubro::class,'idRubro');
+        return $this->belongsTo(Rubro::class,'idRubro');
     }
 }

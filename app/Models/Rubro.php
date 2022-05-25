@@ -21,6 +21,6 @@ class Rubro extends Model
     }
     public function rama()
     {
-        return $this->hasManybelongsTo(Rama::class,'idRama');
+        return $this->belongsTo(Rama::class,'idRama');
     }
 }

@@ -19,6 +19,9 @@
                 font-family: 'Nunito', sans-serif;
                 background : while;
             }
+            .catalogoHeader{
+                background-image: url({{asset('img/museo-artesanias-chiapas.jpg')}});
+            }
         </style>
         <link rel="stylesheet" href="{{asset('css/index.css')}}">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>

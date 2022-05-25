@@ -41,6 +41,12 @@ class CatalogoController extends Controller
         }
         unset($rubroDel);
     }
+    public function resetRama(Request $req)
+    {
+        $ramaReset = Rama::find($req->input('id'));
+        $ramaReset->eliminado = FALSE;
+        $ramaReset->save();
+    }
 
     #Sección rubro--------------------------------------------------------------------
     public function getRubros()
@@ -71,6 +77,14 @@ class CatalogoController extends Controller
             $this->delProducto($productoDel->id);
         }
         unset($productoDel);
+    }
+    public function resetRubro(Request $req)
+    {
+        $rubroReset = Rubro::find($req->input('id'));
+        if (!($rubroReset->rama->eliminado)) {
+            $rubroReset->eliminado = FALSE;
+            $rubroReset->save();
+        }  
     }
 
     #Sección productos---------------------------------------------------------------------
@@ -104,6 +118,14 @@ class CatalogoController extends Controller
             $this->delPieza($piezaDel->id);
         }
         unset($piezaDel);
+    }
+    public function resetProducto(Request $req)
+    {
+        $productoReset = Product::find($req->input('id'));
+        if (!($productoReset->rubro->rama->eliminado or $productoReset->rubro->eliminado)) {
+            $productoReset->eliminado = FALSE;
+            $productoReset->save();
+        }  
     }
 
 
@@ -145,5 +167,13 @@ class CatalogoController extends Controller
         $piezaDel = Pieza::find($id);
         $piezaDel->estatus = "eliminado";
         $piezaDel->save();
+    }
+    public function resetPieza(Request $req)
+    {
+        $piezaReset = Pieza::find($req->input('id'));
+        if (!($piezaReset->producto->rubro->rama->eliminado or $piezaReset->producto->rubro->eliminado or $piezaReset->producto->eliminado)) {
+            $piezaReset->estatus = "activo";
+            $piezaReset->save();
+        }
     }
 }

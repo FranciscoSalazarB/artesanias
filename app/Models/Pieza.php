@@ -15,13 +15,13 @@ class Pieza extends Model
     protected $fillable = [
         'nombre',
         'precio',
-        'status',
+        'estatus',
         'codigoAlterno',
         'venta',
     ];
     public function producto()
     {
-        return $this->hasManybelongsTo(Product::class,'idProducto');
+        return $this->belongsTo(Product::class,'idProducto');
     }
     public function fotos()
     {
