@@ -15,13 +15,18 @@ class ArtesaniasController extends Controller
     }
     public function sendRamas()
     {
-        $ramas = Rama::all();
-        foreach($ramas as $rama){
-            $rubros = $rama->rubros;
-            $pieza = array("rama"=>$rama,"rubros"=>$rubros);
-        }
-        unset($rama);
+        $ramas = Rama::where('eliminado',FALSE)->get();
         return response()->json($ramas);
+    }
+    public function sendRubros(Request $req){
+        $rubrosRes = [];
+        $rubros = Rubro::where('idRama',$req->input('id'))->get();
+        foreach($rubros as $rubro){
+            if(!$rubro->eliminado){
+                array_push($rubrosRes,$rubro);
+            }
+        }
+        return response()->json($rubrosRes);
     }
     public function piezasInRubro(Request $req)
     {
@@ -33,9 +38,9 @@ class ArtesaniasController extends Controller
             $piezas = $producto->piezas;
             foreach($piezas as $pieza)
             {
-                $img = $pieza->fotos;
+                if($pieza->estatus == "activo"){$img = $pieza->fotos;
                 $pieza = array("pieza"=>$pieza,"fotos"=>$img);
-                array_push($piezasElegidas,$pieza);
+                array_push($piezasElegidas,$pieza);}
             }
             unset($pieza);
         }

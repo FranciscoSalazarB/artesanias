@@ -129,6 +129,16 @@ Vue.component('almacen',{
         async resetPieza(pieza){
             pieza.estatus = "activo";
             await this.$http.post(this.urls.piezas+"/reset",pieza);
+        },
+        async addImg(evento){
+            var form_data = new FormData();
+            var img = evento.target.files[0];
+            var idPieza = parseInt(evento.path[0].id);
+            form_data.append('img',img);
+            form_data.append('idPieza',idPieza);
+            console.log(form_data);
+            const response = await this.$http.post(this.urls.piezas+"/addImg",form_data);
+            console.log(response);
         }
     },
 });

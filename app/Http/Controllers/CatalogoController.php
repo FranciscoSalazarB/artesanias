@@ -176,4 +176,13 @@ class CatalogoController extends Controller
             $piezaReset->save();
         }
     }
+    public function addImg(Request $req)
+    {
+        return response()->json($req);
+        if($req->hasFile("img")){
+            return response()->json('hay imagen');
+        }else {
+            return response()->json('negativo camarada');
+        }
+    }
 }

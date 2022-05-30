@@ -31,8 +31,8 @@
                     <span>@{{rama.rama}}</span>
                 </label>
             </form>
-            <form action="#" v-if="ramaSelect != undefined" class="caltalogoSelect">
-                <label v-for="rubro in ramaSelect.rubros">
+            <form action="#" v-if="rubros.length != 0" class="caltalogoSelect">
+                <label v-for="rubro in rubros">
                     <input type="radio" :value="rubro.id" v-model="rubroSelect">
                     <span>@{{rubro.rubro}}</span>
                 </label>

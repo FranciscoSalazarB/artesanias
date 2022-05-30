@@ -24,6 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::post('/catalogo',[ArtesaniasController::class,'sendArtesanias'])->name('catalogo');
 Route::post('/catalogo/ramas',[ArtesaniasController::class,'sendRamas']);
+Route::post('/catalogo/rubros',[ArtesaniasController::class,'sendRubros']);
 Route::post('/catalogo/piezasInRubro',[ArtesaniasController::class,'piezasInRubro']);
 Route::post('/ramas',[CatalogoController::class,'getRamas'])->name('ramasGet');
 Route::post('/ramas/add',[CatalogoController::class,'addRama']);
@@ -51,6 +52,7 @@ Route::post('/piezas/del',function (Request $req){
     app(CatalogoController::class)->delPieza($req->input('id'));
 });
 Route::post('/piezas/reset',[CatalogoController::class,'resetPieza']);
+Route::post('/piezas/addImg',[CatalogoController::class,'addImg'])->name('addImg');
 Route::post('/carrito/getPiezas',[CarritoController::class,'getCarrito'])->name('carritoGet');
 Route::post('/carrito/addPieza',[CarritoController::class,'addToCarrito'])->name('carritoAdd');
 Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->name('carritoRemove');

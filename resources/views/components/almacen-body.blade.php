@@ -104,8 +104,7 @@
             <div class="imgContainer">
                 <img :src="foto.url + foto.nombreArchivo" v-for="foto in pieza.fotos">
                 <div class="imgAdd">
-                    <input type="file" name="newFoto">
-                    <label for="newFoto">Agregar foto</label>
+                    <input type="file" :id="pieza.id" name="newFoto" v-on:change="addImg" accept="image/jpeg, image/png"/>
                 </div>
             </div>
         </div>
