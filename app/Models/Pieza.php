@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Product;
 use App\Models\Foto;
+use App\Models\VentaDetalle;
 
 
 class Pieza extends Model
@@ -16,8 +17,7 @@ class Pieza extends Model
         'nombre',
         'precio',
         'estatus',
-        'codigoAlterno',
-        'venta',
+        'codigoAlterno'
     ];
     public function producto()
     {
@@ -26,5 +26,9 @@ class Pieza extends Model
     public function fotos()
     {
         return $this->hasMany(Foto::class,'idPieza');
+    }
+    public function detalleVenta()
+    {
+        return $this->hasMany(VentaDetalle::class,'idPieza');
     }
 }

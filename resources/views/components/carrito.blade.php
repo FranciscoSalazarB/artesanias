@@ -11,7 +11,7 @@
                     <p>@{{seleccionado.nombre}}</p>
                     <a href="#" v-on:click="remover(index)">Remover del carrito</a>
                 </div>
-                <a href="#" class="comprar">Comprar</a>
+                <a href="#" class="comprar" v-on:click="guardar">Comprar</a>
             </div>
         </div>
     </div>

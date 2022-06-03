@@ -12,6 +12,7 @@ Vue.component('carrito',{
         this.$root.$on('estoyEnCarrito',this.buscarPieza);
         this.rutas.addPieza = document.getElementById('addCarrito').value;
         this.rutas.removePieza = document.getElementById('removeCarrito').value;
+        this.rutas.guardar = document.getElementById('guardarCarrito').value;
         const rutaGet = document.getElementById('getCarrito').value;
         const response = await this.$http.post(rutaGet);
         this.seleccionados = await response.body;
@@ -30,20 +31,20 @@ Vue.component('carrito',{
             this.activo = true;
         },
         async agregar(data){
-            console.log(data);
             this.seleccionados.push(data.pieza);
-            console.log(this.seleccionados);
             const pieza = {idPieza:data.pieza.id};
             var response = await this.$http.post(this.rutas.addPieza,pieza);
         },
         async remover(index){
-            console.log(this.seleccionados)
             const artesania = this.seleccionados[index];
-            console.log(artesania);
             this.seleccionados.splice(index,1);
             this.$root.$emit('removeCarr',artesania.id);
             const pieza = {idPieza:artesania.id};
             const res = await this.$http.post(this.rutas.removePieza,pieza);
+        },
+        async guardar(){
+            this.$http.post(this.rutas.guardar);
+            this.seleccionados = [];
         }
     }
 })

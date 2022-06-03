@@ -1,9 +1,12 @@
 <?php
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtesaniasController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,5 +59,10 @@ Route::post('/piezas/addImg',[CatalogoController::class,'addImg'])->name('addImg
 Route::post('/carrito/getPiezas',[CarritoController::class,'getCarrito'])->name('carritoGet');
 Route::post('/carrito/addPieza',[CarritoController::class,'addToCarrito'])->name('carritoAdd');
 Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->name('carritoRemove');
+Route::post('/carrito/guardar',[CarritoController::class,'GuardarCarrito'])->name('carritoGuardar');
+Route::post('/cliente',[UserController::class,'cliente'])->name('cliente');
+Route::post('/cliente/compras',[UserController::class,'compras']);
+Route::post('/cliente/destinos',[UserController::class,'destinos']);
+Route::post('/cliente/prueba',[UserController::class,'prueba']);
 
 require __DIR__.'/auth.php';

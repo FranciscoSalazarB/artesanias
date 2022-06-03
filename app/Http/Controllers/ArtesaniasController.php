@@ -38,9 +38,20 @@ class ArtesaniasController extends Controller
             $piezas = $producto->piezas;
             foreach($piezas as $pieza)
             {
-                if($pieza->estatus == "activo"){$img = $pieza->fotos;
-                $pieza = array("pieza"=>$pieza,"fotos"=>$img);
-                array_push($piezasElegidas,$pieza);}
+                if($pieza->estatus == "activo"){
+                    $img = $pieza->fotos;
+                    $pieza = array("pieza"=>$pieza,"fotos"=>$img);
+                    array_push($piezasElegidas,$pieza);
+                }else{
+                    if($pieza->estatus == 'apartado'){
+                        $dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->created_at)->diff(date_create(date('Y-m-d')));
+                        if(!$pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->vendido and ($dif->y >= 1 or $dif->m >=1 or $dif->d >=1)){
+                            $img = $pieza->fotos;
+                            $pieza = array("pieza"=>$pieza,"fotos"=>$img);
+                            array_push($piezasElegidas,$pieza);
+                        }
+                    }
+                }
             }
             unset($pieza);
         }

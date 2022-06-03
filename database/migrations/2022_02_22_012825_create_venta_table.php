@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Celular extends Migration
+class CreateVentaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,17 @@ class Celular extends Migration
      */
     public function up()
     {
-        Schema::create('celular', function (Blueprint $table){
+        Schema::create('venta', function (Blueprint $table) {
             $table->id();
-            $table->string('numero');
+            $table->boolean('vendido')->default(FALSE);
+            $table->string('referenciaEnvio');
+            $table->timestamps();
             $table->unsignedBigInteger('idUser');
+            $table->unsignedBigInteger('idDestino');
+        });
+        Schema::table('venta', function(Blueprint $table){
             $table->foreign('idUser')->references('id')->on('user');
+            $table->foreign('idDestino')->references('id')->on('destino');
         });
     }
 
@@ -28,6 +34,6 @@ class Celular extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('venta_lineas');
     }
 }

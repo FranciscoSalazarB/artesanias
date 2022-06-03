@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pieza;
+use App\Models\Venta;
+use App\Models\VentaDetalle;
 
 class CarritoController extends Controller
 {
@@ -40,5 +43,32 @@ class CarritoController extends Controller
         }
         session()->put('carrito',$carrito);
         return response()->json(session('carrito'));
+    }
+
+    public function GuardarCarrito()
+    {
+        $venta = new Venta;
+        $venta->idUser = Auth::id();
+        $venta->idDestino = 1;
+        $venta->referenciaEnvio = "";
+        $venta->save();
+        $idPiezas = session('carrito');
+        foreach($idPiezas as $idPieza){
+            $referencia = new VentaDetalle;
+            $referencia->idVenta = $venta->id;
+            $referencia->idPieza = $idPieza;
+            $referencia->save();
+            $this->apartarPieza($idPieza);
+        }
+        unset($idPieza);
+        session()->put('carrito',[]);
+        return redirect()->route('dashboard');
+    }
+
+    public function apartarPieza($id)
+    {
+        $pieza = Pieza::find($id);
+        $pieza->estatus = "apartado";
+        $pieza->save();
     }
 }

@@ -17,7 +17,14 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
         <script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.3/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/es.js"></script>
+        @if(Auth::user()->roll == "cliente")
+        <script src="{{asset('js/cliente_component.js')}}"></script>
+        <script src="{{asset('js/clienteCompras_component.js')}}"></script>
+        @else
         <script src="{{asset('js/almacen_component.js')}}"></script>
+        @endif
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -43,7 +50,7 @@
         var app = new Vue({
             el:"#app",
             data:{
-                picked:'pedidos' 
+                picked:'' 
             }
         });
     </script>
