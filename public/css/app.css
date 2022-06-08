@@ -1441,3 +1441,8 @@ select {
   display: flex;
   flex-direction: row;
 }
+.compra{
+  margin-top: 1.5rem;
+  padding: 1rem;
+  box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px;
+}

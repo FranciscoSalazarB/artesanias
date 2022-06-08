@@ -34,10 +34,11 @@
     <div v-if="picked == 'compras'">
         <cliente-compras inline-template>
             <div v-if="compras.length != 0">
-                <div v-for="compra in compras">
+                <div v-for="compra in compras" class="compra">
                     <p>Pedido @{{compra.venta.creado}}</p>
+                    <p>Total $@{{total(compra.piezas)}}</p>
                     <div v-for="pieza in compra.piezas">
-                        @{{pieza.nombre}} 
+                        @{{pieza.nombre}}, $@{{pieza.precio}}
                     </div>
                 </div>
                 <br>
