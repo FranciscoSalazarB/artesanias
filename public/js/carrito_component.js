@@ -31,7 +31,9 @@ Vue.component('carrito',{
             this.activo = true;
         },
         async agregar(data){
-            this.seleccionados.push(data.pieza);
+            var piezaCarrito = data.pieza;
+            piezaCarrito['fotos'] = data.fotos
+            this.seleccionados.push(piezaCarrito);
             const pieza = {idPieza:data.pieza.id};
             var response = await this.$http.post(this.rutas.addPieza,pieza);
         },
@@ -43,8 +45,17 @@ Vue.component('carrito',{
             const res = await this.$http.post(this.rutas.removePieza,pieza);
         },
         async guardar(){
-            this.$http.post(this.rutas.guardar);
+            var res = await this.$http.post(this.rutas.guardar);
+            console.log(res);
             this.seleccionados = [];
+        }
+    },
+    computed:{
+        costoTotal(){
+            var precios = this.seleccionados.map(pieza=>pieza.precio);
+            return precios.reduce(function(acum,precio){
+                return acum + precio;
+            });
         }
     }
 })

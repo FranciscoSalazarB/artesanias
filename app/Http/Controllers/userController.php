@@ -33,7 +33,7 @@ class UserController extends Controller
             array_push($res,array('venta'=>$compra,'piezas'=>$piezas));
         }
         unset($compra);
-        return response()->json($res);
+        return response()->json(array_reverse($res));
     }
     public function prueba()
     {

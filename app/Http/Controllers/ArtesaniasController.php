@@ -50,7 +50,6 @@ class ArtesaniasController extends Controller
                             $pieza = array("pieza"=>$pieza,"fotos"=>$img);
                             array_push($piezasElegidas,$pieza);
                         }
-                        #array_push($piezasElegidas,array("pieza"=>$pieza,"fotos"=>$dif));
                     }
                 }
             }

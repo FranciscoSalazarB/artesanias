@@ -14,6 +14,7 @@ Vue.component('catalogo',{
         try {
             this.ramas = await this.$http.post(this.ruta+"/ramas");
             this.ramas = this.ramas.body;
+            this.ramaSelect = this.ramas[0];
         } catch (error) {
             console.log(error);
         }
@@ -22,11 +23,11 @@ Vue.component('catalogo',{
         async getRubrosByRama(rama){
             rubros = await this.$http.post(this.ruta+"/rubros",rama);
             this.rubros = rubros.body;
+            this.rubroSelect = this.rubros[0].id;
         },
         async getPiezasByRubro(rubro){
             const res = await this.$http.post(this.ruta+"/piezasInRubro",rubro);
             this.piezas = res.body;
-            console.log(res)
         }
     },
     watch:{

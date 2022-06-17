@@ -16,9 +16,6 @@ Vue.component('cliente',{
         this.user = this.user.body;
         this.destinos = await this.$http.post(this.ruta+"/destinos");
         this.destinos = this.destinos.body;
-        console.log(this);
-        const res = await this.$http.post(this.ruta+"/prueba");
-        console.log(res);
     },
     methods:{
         async agregarDestino(){
