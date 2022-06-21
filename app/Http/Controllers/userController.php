@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pieza;
+use App\Models\Destino;
 
 class UserController extends Controller
 {
@@ -35,9 +36,12 @@ class UserController extends Controller
         unset($compra);
         return response()->json(array_reverse($res));
     }
-    public function prueba()
+    public function addDestino(Request $req)
     {
-        $pieza = Pieza::find(1);
-        return response()->json(date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->created_at)->diff(date_create(date('Y-m-d'))));
+        $nuevoDestino = new Destino;
+        $nuevoDestino->direccion = $req->input('direccion');
+        $nuevoDestino->cp = $req->input('cp');
+        $nuevoDestino->idUser = Auth::id();
+        $nuevoDestino->save();
     }
 }

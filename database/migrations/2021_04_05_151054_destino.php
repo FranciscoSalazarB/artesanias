@@ -16,7 +16,7 @@ class Destino extends Migration
         Schema::create('destino', function (Blueprint $table){
             $table->id();
             $table->string('direccion');
-            $table->string('gps');
+            $table->string('cp');
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('user');
         });

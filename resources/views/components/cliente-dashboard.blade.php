@@ -4,29 +4,30 @@
         <cliente inline-template>
             <div>
                 <div>
-                    Nombre : @{{user.name}} <br>
-                    Correo : @{{user.email}} <br> 
-                    @{{user.roll}}
+                    <p>Nombre : @{{user.name}} <br>Correo : @{{user.email}} <br> @{{user.roll}}</p>
                 </div>
                 <br>
                 <div>
                     <p>Destinos</p>
                     <div v-for="destino in destinos">
-                        @{{destino.direccion}} @{{destino.gps}}
+                        @{{destino.direccion}} @{{destino.cp}}
                     </div>
-                    <div>
-                        <label>
-                            <span>Dirección</span>
-                            <input type="text">
-                        </label>
-                        <label>
-                            <span>gps</span>
-                            <input type="text">
-                        </label>
-                        <label>
-                            <button>Agregar destino</button>
-                        </label>
-                    </div>
+                    <destinosagregar inline-template>
+                        <div>
+                            <input type="hidden" id="destinosRuta" value="{{route('addDestino')}}">
+                            <label>
+                                <span>Dirección</span>
+                                <input type="text" v-model="direccion">
+                            </label>
+                            <label>
+                                <span>cp</span>
+                                <input type="text" v-model="cp">
+                            </label>
+                            <label>
+                                <button v-on:click="agregar">Agregar destino</button>
+                            </label>
+                        </div>
+                    </destinosagregar>
                 </div>
             </div>
         </cliente>

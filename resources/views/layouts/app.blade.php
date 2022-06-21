@@ -29,6 +29,7 @@
         @if(Auth::user()->roll == "cliente")
         <script src="{{asset('js/cliente_component.js')}}"></script>
         <script src="{{asset('js/clienteCompras_component.js')}}"></script>
+        <script src="{{asset('js/destinos_agregar.js')}}"></script>
         @else
         <script src="{{asset('js/almacen_component.js')}}"></script>
         <script src="{{asset('js/admin_pedidos.js')}}"></script>
