@@ -1413,12 +1413,12 @@ input[type="radio"] {
   background-color: #fff !important;
   margin: 0 !important;
 }
-label>span{
+.spanRadioCustom{
   padding: 0.25rem;
   transition: all ease 0.5s;
   border-radius: 5px;
 }
-label>span:hover{
+.spanRadioCustom:hover{
   background-color: #a22244;
   color: #fff;
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Destino;
+use App\Models\User;
 use App\Models\VentaDetalle;
 
 class Venta extends Model
@@ -25,5 +26,9 @@ class Venta extends Model
     public function destino()
     {
         return $this->belongsTo(Destino::class,'idDestino');
+    }
+    public function cliente()
+    {
+        return $this->belongsTo(User::class,'idUser');
     }
 }

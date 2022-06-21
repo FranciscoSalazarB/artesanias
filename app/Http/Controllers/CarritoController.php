@@ -60,7 +60,7 @@ class CarritoController extends Controller
         if(count($piezasNoDisponibles)>=1){
             return response()->json($piezasNoDisponibles);
         }
-        /*$venta = new Venta;
+        $venta = new Venta;
         $venta->idUser = Auth::id();
         $venta->idDestino = 1;
         $venta->referenciaEnvio = "";
@@ -72,9 +72,9 @@ class CarritoController extends Controller
             $referencia->save();
             $this->apartarPieza($idPieza);
         }
-        unset($idPieza);*/
+        unset($idPieza);
         session()->put('carrito',[]);
-        return redirect()->route('dashboard');
+        return response()->json($piezasNoDisponibles);
     }
 
     public function apartarPieza($id)
@@ -89,7 +89,7 @@ class CarritoController extends Controller
         if($pieza->estatus == "activo") $salida = TRUE;
         if ($pieza->estatus == "apartado") {
             $dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->created_at)->diff(date_create(date('Y-m-d')));
-            $salida = $dif->y >= 1 or $dif->m >=1 or $dif->d >=1;
+            $salida = ($dif->y >= 1 or $dif->m >=1 or $dif->d >=1);
         }
         return $salida;
     }
@@ -100,5 +100,36 @@ class CarritoController extends Controller
             unset($carrito[array_search($idPieza,$carrito)]);
         }
         session()->put('carrito',$carrito);
+    }
+    public function getPedidos()
+    {
+        $salida = [];
+        $pedidos = Venta::where('vendido',FALSE)->get();
+        foreach($pedidos as $pedido){
+            $dif = date_create($pedido->created_at)->diff(date_create(date('Y-m-d')));
+            if (!($dif->y >= 1 or $dif->m >=1 or $dif->d >=1)) {
+                $pedido->cliente;
+                $pedido->destino;
+                foreach($pedido->detalles as $detalle){
+                    $detalle->pieza;
+                }
+                unset($detalle);
+                array_push($salida,$pedido);
+            }
+        }
+        unset($pedido);
+        return response()->json($salida);
+    }
+    public function pagarPedido(Request $req)
+    {
+        $venta = Venta::find($req->input('idPedido'));
+        $venta->vendido = TRUE;
+        $venta->save();
+        foreach($venta->detalles as $detalle){
+            $pieza = $detalle->pieza;
+            $pieza->estatus ="vendido";
+            $pieza->save();
+        }
+        unset($detalle);
     }
 }

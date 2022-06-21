@@ -17,10 +17,13 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
-                background : while;
+                background-image: url({{asset('img/grecas.png')}});
+                background-position: center;
+                background-size: cover;
             }
             .catalogoHeader{
                 background-image: url({{asset('img/museo-artesanias-chiapas.jpg')}});
+                background-size : cover;
             }
         </style>
         <link rel="stylesheet" href="{{asset('css/index.css')}}">

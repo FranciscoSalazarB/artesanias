@@ -1,5 +1,5 @@
 <div class="nav_bar">
-    <h1>Casa de las Artesanías</h1>
+    <img src="{{asset('img/logo2.png')}}" class="logo">
     <ul>
         <li><a href="https://www.casadelasartesaniaschiapas.gob.mx/#gsc.tab=0" class="button">PáginaPrincipal</a></li>
         @auth

@@ -12,6 +12,13 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <style>
+            body{
+                background-image: url({{asset('img/grecas.png')}});
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,6 +31,7 @@
         <script src="{{asset('js/clienteCompras_component.js')}}"></script>
         @else
         <script src="{{asset('js/almacen_component.js')}}"></script>
+        <script src="{{asset('js/admin_pedidos.js')}}"></script>
         @endif
     </head>
     <body class="font-sans antialiased">

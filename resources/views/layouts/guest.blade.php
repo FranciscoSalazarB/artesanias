@@ -13,13 +13,19 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{asset('css/index.css')}}">
-
+        <style>
+            .fondo{
+                background-image: url({{asset('img/grecas.png')}});
+                background-position: center;
+                background-size: cover;
+            }.hola{}
+        </style>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
         <x-nav_bar/>
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased fondo">
             {{ $slot }}
         </div>
     </body>

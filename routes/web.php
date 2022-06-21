@@ -65,4 +65,6 @@ Route::post('/cliente/compras',[UserController::class,'compras']);
 Route::post('/cliente/destinos',[UserController::class,'destinos']);
 Route::post('/cliente/prueba',[UserController::class,'prueba']);
 
+Route::post('/pedidos',[CarritoController::class,'getPedidos'])->name('adminPedidos');
+Route::post('/pedidos/pagado',[CarritoController::class,'pagarPedido']);
 require __DIR__.'/auth.php';
