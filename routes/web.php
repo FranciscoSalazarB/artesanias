@@ -62,7 +62,7 @@ Route::post('/carrito/removePieza',[CarritoController::class,'removeCarrito'])->
 Route::post('/carrito/guardar',[CarritoController::class,'GuardarCarrito'])->name('carritoGuardar');
 Route::post('/cliente',[UserController::class,'cliente'])->name('cliente');
 Route::post('/cliente/compras',[UserController::class,'compras']);
-Route::post('/cliente/destinos',[UserController::class,'destinos']);
+Route::post('/cliente/destinos',[UserController::class,'destinos'])->name('destinosUser');
 Route::post('/cliente/agregarDestino',[UserController::class,'addDestino'])->name('addDestino');
 
 Route::post('/pedidos',[CarritoController::class,'getPedidos'])->name('adminPedidos');

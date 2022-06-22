@@ -38,6 +38,7 @@
                 <div v-for="compra in compras" class="compra">
                     <p>Pedido @{{compra.venta.creado}}</p>
                     <p>Total $@{{total(compra.piezas)}}</p>
+                    <p>Enviado ha @{{compra.venta.destino.direccion}}</p>
                     <div v-for="pieza in compra.piezas">
                         @{{pieza.nombre}}, $@{{pieza.precio}}
                     </div>

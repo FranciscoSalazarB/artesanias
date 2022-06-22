@@ -46,7 +46,7 @@ class CarritoController extends Controller
         return response()->json(session('carrito'));
     }
 
-    public function GuardarCarrito()
+    public function GuardarCarrito(Request $req)
     {
         $piezasNoDisponibles = [];
         $idPiezas = session('carrito');
@@ -62,7 +62,7 @@ class CarritoController extends Controller
         }
         $venta = new Venta;
         $venta->idUser = Auth::id();
-        $venta->idDestino = 1;
+        $venta->idDestino = $req->input('idDestino');
         $venta->referenciaEnvio = "";
         $venta->save();
         foreach($idPiezas as $idPieza){

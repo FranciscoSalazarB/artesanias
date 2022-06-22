@@ -16,8 +16,10 @@ class UserController extends Controller
     }
     public function destinos()
     {
-        $destinos = Auth::user()->destinos;
+        $destinos = [];
+        if (Auth::check()) $destinos = Auth::user()->destinos;
         return response()->json($destinos);
+        
     }
     public function compras()
     {
@@ -25,6 +27,7 @@ class UserController extends Controller
         $compras = Auth::user()->compras;
         foreach($compras as $compra){
             $piezas = [];
+            $compra->destino;
             $detalles = $compra->detalles;
             foreach($detalles as $detalle){
                 $pieza = $detalle->pieza;

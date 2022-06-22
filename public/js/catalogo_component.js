@@ -18,6 +18,7 @@ Vue.component('catalogo',{
         } catch (error) {
             console.log(error);
         }
+        this.$root.$on('piezasApartadas',this.piezasApartadas)
     },
     methods:{
         async getRubrosByRama(rama){
@@ -28,11 +29,14 @@ Vue.component('catalogo',{
         async getPiezasByRubro(rubro){
             const res = await this.$http.post(this.ruta+"/piezasInRubro",rubro);
             this.piezas = res.body;
+        },
+        piezasApartadas(){
+            this.getPiezasByRubro({id : this.rubroSelect});
         }
     },
     watch:{
         rubroSelect: function(idRubro){
-            var rubro = {id:idRubro}
+            var rubro = {id : idRubro}
             this.getPiezasByRubro(rubro);
         },
         ramaSelect : function(rama){   

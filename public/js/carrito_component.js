@@ -3,7 +3,9 @@ Vue.component('carrito',{
         return {
             activo:false,
             rutas:{},
-            seleccionados : []
+            seleccionados : [],
+            destinos:[],
+            destinoSelect:""
         }
     },
     async mounted(){
@@ -13,9 +15,14 @@ Vue.component('carrito',{
         this.rutas.addPieza = document.getElementById('addCarrito').value;
         this.rutas.removePieza = document.getElementById('removeCarrito').value;
         this.rutas.guardar = document.getElementById('guardarCarrito').value;
-        const rutaGet = document.getElementById('getCarrito').value;
-        const response = await this.$http.post(rutaGet);
-        this.seleccionados = await response.body;
+        const carritoGet = document.getElementById('getCarrito').value;
+        const responseCarrito = await this.$http.post(carritoGet);
+        this.seleccionados = responseCarrito.body;
+        const destinosGet = document.getElementById('getDestinos').value;
+        const responseDestinos = await this.$http.post(destinosGet);
+        this.destinos = responseDestinos.body;
+        console.log(responseDestinos);
+        this.destinoSelect = this.destinos[0];
     },
     methods:{
         buscarPieza(idPieza, callback){
@@ -45,9 +52,23 @@ Vue.component('carrito',{
             const res = await this.$http.post(this.rutas.removePieza,pieza);
         },
         async guardar(){
-            var res = await this.$http.post(this.rutas.guardar);
-            console.log(res);
-            this.seleccionados = [];
+            var ruta = {idDestino : this.destinoSelect};
+            var res = await this.$http.post(this.rutas.guardar, ruta);
+            res = res.body
+            if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
+            else{
+                this.seleccionados.filter(function(pieza){
+                    piezaEliminada = false;
+                    res.forEach(item=>{
+                        if(item.id == pieza.id){
+                            piezaEliminada = true;
+                        }
+                    });
+                    return !piezaEliminada;
+                });
+                this.$emit('piezasApartadas');
+                alert('Algunas piezas ya están apartadas');
+            }
         }
     },
     computed:{
