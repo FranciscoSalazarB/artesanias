@@ -55,6 +55,8 @@ Vue.component('carrito',{
             var ruta = {idDestino : this.destinoSelect};
             var res = await this.$http.post(this.rutas.guardar, ruta);
             res = res.body
+            console.log(res);
+            /*
             if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
             else{
                 this.seleccionados.filter(function(pieza){
@@ -68,7 +70,7 @@ Vue.component('carrito',{
                 });
                 this.$emit('piezasApartadas');
                 alert('Algunas piezas ya están apartadas');
-            }
+            }*/
         }
     },
     computed:{

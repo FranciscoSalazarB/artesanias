@@ -13,8 +13,12 @@ class Venta extends Model
     use HasFactory;
     protected $table = 'venta';
     protected $fillable = [
-        'vendido',
+        'status',
         'referenciaEnvio',
+        'fechaLimitePago',
+        'fechaLimiteConfirmar',
+        'fechaConfirmacion',
+        'fechaCancelacion',
         'idUsuario',
         'idDestino'
     ];

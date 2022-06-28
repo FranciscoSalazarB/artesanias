@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Pieza;
 use App\Models\Venta;
 use App\Models\VentaDetalle;
+use App\Models\PoliticaTiempo;
 
 class CarritoController extends Controller
 {
@@ -64,6 +65,13 @@ class CarritoController extends Controller
         $venta->idUser = Auth::id();
         $venta->idDestino = $req->input('idDestino');
         $venta->referenciaEnvio = "";
+        $hoy = PoliticaTiempo::where('dia',date('l'))->first();
+        $fechaLimitePago = date_create(date('Y-m-d'));
+        $fechaLimiteConfirmar = date_create(date('Y-m-d'));
+        date_add($fechaLimitePago,date_interval_create_from_date_string($hoy->diasRelativosAvisoDePago." days"));
+        date_add($fechaLimiteConfirmar,date_interval_create_from_date_string(($hoy->diasRelativosAvisoDePago + $hoy->diasRelativosAvisoDeConfirmacion)." days"));
+        $venta->fechaLimitePago = $fechaLimitePago;
+        $venta->fechaLimiteConfirmar = $fechaLimiteConfirmar;
         $venta->save();
         foreach($idPiezas as $idPieza){
             $referencia = new VentaDetalle;
@@ -88,8 +96,9 @@ class CarritoController extends Controller
         $salida = FALSE;
         if($pieza->estatus == "activo") $salida = TRUE;
         if ($pieza->estatus == "apartado") {
-            $dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->created_at)->diff(date_create(date('Y-m-d')));
+            $dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->fechaLimiteConfirmar)->diff(date_create(date('Y-m-d')));
             $salida = ($dif->y >= 1 or $dif->m >=1 or $dif->d >=1);
+            $salida = ($salida or $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->status == 'cancelado');
         }
         return $salida;
     }
@@ -104,10 +113,12 @@ class CarritoController extends Controller
     public function getPedidos()
     {
         $salida = [];
-        $pedidos = Venta::where('vendido',FALSE)->get();
+        $pedidos = Venta::where('status','espera')->get();
+        $hoy = date_create(date('Y-m-d'));
         foreach($pedidos as $pedido){
-            $dif = date_create($pedido->created_at)->diff(date_create(date('Y-m-d')));
-            if (!($dif->y >= 1 or $dif->m >=1 or $dif->d >=1)) {
+            $limitePago = date_create($pedido->fechaLimiteConfirmar);
+            $dif = $limitePago->diff($hoy);
+            if (!($dif->y >= 1 or $dif->m >=1 or $dif->d >=1)or($hoy<$limitePago)) {
                 $pedido->cliente;
                 $pedido->destino;
                 foreach($pedido->detalles as $detalle){

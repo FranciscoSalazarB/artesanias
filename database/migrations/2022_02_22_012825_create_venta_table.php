@@ -15,9 +15,13 @@ class CreateVentaTable extends Migration
     {
         Schema::create('venta', function (Blueprint $table) {
             $table->id();
-            $table->boolean('vendido')->default(FALSE);
+            $table->string('status')->default('espera');
             $table->string('referenciaEnvio');
             $table->timestamps();
+            $table->dateTime('fechaLimitePago',$precision = 0);
+            $table->dateTime('fechaLimiteConfirmar',$precision = 0);
+            $table->dateTime('fechaConfirmacion',$precision = 0)->nullable();
+            $table->dateTime('fechaCancelacion',$precision = 0)->nullable();
             $table->unsignedBigInteger('idUser');
             $table->unsignedBigInteger('idDestino');
         });
