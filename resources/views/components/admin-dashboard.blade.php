@@ -24,6 +24,20 @@
         </almacen>
     </div>
     <div v-if="picked == 'ajustes'">
-        ajustes
+        <input type="hidden" id="rutaAjustes" value = "{{route('ajustes')}}">
+        <ajustes inline-template>
+            <div>
+                <div v-for="dia in dias">
+                    <p>@{{getDayName(dia.id)}}</p>
+                    <div>
+                        <input type="range" id="test5" min="1" max="7" v-model="dia.diasRelativosAvisoDePago"/>
+                        <span>Día Límitie de pago @{{getDayName(dia.id + parseInt(dia.diasRelativosAvisoDePago))}}</span>
+                        <input type="range" id="test5" min="1" max="7" v-model="dia.diasRelativosAvisoDeConfirmacion"/>
+                        <span>Día Límitie de confirmación @{{getDayName(dia.id + parseInt(dia.diasRelativosAvisoDePago) + parseInt(dia.diasRelativosAvisoDeConfirmacion))}}</span>
+                    </div>
+                </div>
+                <button v-on:click="guardarCambios">Guardar Cambios</button>
+            </div>
+        </ajustes>
     </div>
 </div>

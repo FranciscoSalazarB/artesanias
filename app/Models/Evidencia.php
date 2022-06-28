@@ -9,4 +9,7 @@ class Evidencia extends Model
 {
     use HasFactory;
     protected $table = 'evidencia';
+    protected $fillable = [
+        'nombreArchivo'
+    ];
 }

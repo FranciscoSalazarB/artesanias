@@ -33,6 +33,7 @@
         @else
         <script src="{{asset('js/almacen_component.js')}}"></script>
         <script src="{{asset('js/admin_pedidos.js')}}"></script>
+        <script src="{{asset('js/ajustes_admin.js')}}"></script>
         @endif
     </head>
     <body class="font-sans antialiased">

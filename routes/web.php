@@ -6,6 +6,7 @@ use App\Http\Controllers\ArtesaniasController;
 use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AjustesController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -67,4 +68,7 @@ Route::post('/cliente/agregarDestino',[UserController::class,'addDestino'])->nam
 
 Route::post('/pedidos',[CarritoController::class,'getPedidos'])->name('adminPedidos');
 Route::post('/pedidos/pagado',[CarritoController::class,'pagarPedido']);
+Route::post('/ajustes',[AjustesController::class,'getAjustes'])->name('ajustes');
+Route::post('/ajustes/guardar',[AjustesController::class,'saveAjustes']);
+
 require __DIR__.'/auth.php';
