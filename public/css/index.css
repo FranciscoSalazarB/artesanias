@@ -249,6 +249,17 @@ body{
   border: 3px solid #a22244;
   border-radius: 100%;
 }
+.carrito_info{
+  display: flex;
+  flex-direction: row;
+  width: 75%;
+  align-items: center;
+  justify-content: space-around;
+}
+.texto_carrito{
+  color: #fff;
+  font-size: 1rem;
+}
 #recorridoVirtual{
   width: 50%;
   height: 20vh;

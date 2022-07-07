@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Destino;
 use App\Models\User;
 use App\Models\VentaDetalle;
+use App\Models\Evidencia;
 
 class Venta extends Model
 {
@@ -34,5 +35,9 @@ class Venta extends Model
     public function cliente()
     {
         return $this->belongsTo(User::class,'idUser');
+    }
+    public function evidencia()
+    {
+        return $this->hasMany(Evidencia::class,'idVenta');
     }
 }

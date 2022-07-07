@@ -1405,7 +1405,30 @@ select {
 .compra{
   margin-top: 1.5rem;
   padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
   box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px;
+}
+.evidencia{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.evidencia>button{
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+.cancelarPedido{
+  background-color: #f00;
+  color: #fff;
+}
+.subirEvidencia{
+  background-color: #2563eb;
+  color: #fff;
 }
 input[type="radio"] {
   -webkit-appearance: none !important;

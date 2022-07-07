@@ -4,4 +4,6 @@ composer install
 npm install
 php artisan key:generate
 php artisan migrate:fresh
+php artisan db:seed
+php artisan storage:link
 echo Instalacion terminada :3

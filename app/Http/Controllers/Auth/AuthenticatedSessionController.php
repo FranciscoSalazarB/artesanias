@@ -31,8 +31,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect('/');
+        $roll = Auth::user()->roll;
+        if($roll == 'cliente') return redirect('/');
+        return redirect('/dashboard');
     }
 
     /**

@@ -13,11 +13,11 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <style>
-            body{
+            .fondo{
                 background-image: url({{asset('img/grecas.png')}});
                 background-position: center;
                 background-size: cover;
-            }
+            }.hola{}
         </style>
 
         <!-- Scripts -->
@@ -37,7 +37,7 @@
         @endif
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100 fondo">
             @include('layouts.navigation')
             <div id="app">
                 <input type="hidden" id="csrf_token" value="{{ csrf_token() }}">
@@ -53,14 +53,22 @@
                 </main>
             </div>
         </div>
+        <input type="hidden" id="user" value="{{route('cliente')}}">
     </body>
     <script>
         let csrf_token =  document.getElementById('csrf_token');
         if(csrf_token !== null) Vue.http.headers.common['X-CSRF-TOKEN'] = csrf_token.value;
+        let userRuta = document.getElementById('user').value;
         var app = new Vue({
             el:"#app",
             data:{
-                picked:'' 
+                picked : ''
+            },
+            async mounted(){
+                var user = await this.$http.post(userRuta);
+                user = user.body;
+                if(user.roll == 'cliente') this.picked = 'main';
+                else this.picked = 'pedidos';
             }
         });
     </script>

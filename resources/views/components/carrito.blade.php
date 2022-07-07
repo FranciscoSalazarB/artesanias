@@ -10,11 +10,15 @@
                     <a href="#" v-on:click="remover(index)">&#10006;</a>
                 </div>
             </div>
-            <div v-if="seleccionados.length !== 0">
-                <select v-model="destinoSelect">
-                    <option :value="destino.id" v-for="destino in destinos">@{{destino.direccion}}</option>
-                </select>
-                <a href="#" class="comprar" v-on:click="guardar">Comprar por $@{{costoTotal}}</a>
+            <div v-if="seleccionados.length !== 0" class="carrito_info">
+                <div>
+                    <div class="texto_carrito">Costo de envío : $100</div>
+                    <div class="texto_carrito">Enviar a :</div>
+                    <select v-model="destinoSelect" :value="destinos[0]">
+                        <option :value="destino.id" v-for="destino in destinos">@{{destino.direccion}}</option>
+                    </select>
+                </div>
+                <a href="#" class="comprar" v-on:click="guardar">Realizar Pedido por $@{{costoTotal}}</a>
             </div>
         </div>
     </div>

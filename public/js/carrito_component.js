@@ -52,25 +52,28 @@ Vue.component('carrito',{
             const res = await this.$http.post(this.rutas.removePieza,pieza);
         },
         async guardar(){
-            var ruta = {idDestino : this.destinoSelect};
-            var res = await this.$http.post(this.rutas.guardar, ruta);
-            res = res.body
-            console.log(res);
-            /*
-            if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
-            else{
-                this.seleccionados.filter(function(pieza){
-                    piezaEliminada = false;
-                    res.forEach(item=>{
-                        if(item.id == pieza.id){
-                            piezaEliminada = true;
-                        }
+            if(confirm('¿Está seguro de apartar estos productos?')){
+                var ruta = {idDestino : this.destinoSelect};
+                var res = await this.$http.post(this.rutas.guardar, ruta);
+                res = res.body
+                console.log(res);
+                if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
+                else{
+                    this.seleccionados = await this.seleccionados.filter(function(pieza){
+                        piezaEliminada = false;
+                        res.forEach(item=>{
+                            if(item.id == pieza.id){
+                                piezaEliminada = true;
+                            }
+                        });
+                        return !piezaEliminada;
                     });
-                    return !piezaEliminada;
-                });
-                this.$emit('piezasApartadas');
-                alert('Algunas piezas ya están apartadas');
-            }*/
+                    this.$emit('piezasApartadas');
+                    alert('Algunas piezas ya están apartadas');
+                }
+            } else {
+                console.log(this.destinoSelect);
+            }
         }
     },
     computed:{

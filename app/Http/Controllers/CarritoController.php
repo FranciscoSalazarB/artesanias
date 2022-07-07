@@ -70,6 +70,8 @@ class CarritoController extends Controller
         $fechaLimiteConfirmar = date_create(date('Y-m-d'));
         date_add($fechaLimitePago,date_interval_create_from_date_string($hoy->diasRelativosAvisoDePago." days"));
         date_add($fechaLimiteConfirmar,date_interval_create_from_date_string(($hoy->diasRelativosAvisoDePago + $hoy->diasRelativosAvisoDeConfirmacion)." days"));
+        $fechaLimitePago->modify('+23 hours');
+        $fechaLimiteConfirmar->modify('+23 hours');
         $venta->fechaLimitePago = $fechaLimitePago;
         $venta->fechaLimiteConfirmar = $fechaLimiteConfirmar;
         $venta->save();
@@ -96,9 +98,14 @@ class CarritoController extends Controller
         $salida = FALSE;
         if($pieza->estatus == "activo") $salida = TRUE;
         if ($pieza->estatus == "apartado") {
-            $dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->fechaLimiteConfirmar)->diff(date_create(date('Y-m-d')));
+            $ultimaVenta = $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta;
+            if($ultimaVenta->status=="cancelado" or $ultimaVenta->status="denegado") $salida = TRUE;
+            if($ultimaVenta->status == "espera"){
+                if (date_create($ultimaVenta->fechaLimitePago) < date_create(date('Y-m-d')) and count($ultimaVenta->evidencia)== 0) $salida = TRUE;
+            }
+            /*$dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->fechaLimiteConfirmar)->diff(date_create(date('Y-m-d')));
             $salida = ($dif->y >= 1 or $dif->m >=1 or $dif->d >=1);
-            $salida = ($salida or $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->status == 'cancelado');
+            $salida = ($salida or $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->status == 'cancelado');*/
         }
         return $salida;
     }
