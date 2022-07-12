@@ -1376,11 +1376,12 @@ select {
   font-size: 1rem;
   color: #fff;
   padding: 0.25rem;
+  margin: 0.5rem;
   border-radius: 3px;
 }
 .almacenBody img,.imgAdd{
-  width: 150px;
-  height: 150px;
+  width: 90px;
+  height: 90px;
   border-radius: 100%;
   margin-right: 0.5rem;
   background-color: #ccc;
@@ -1448,4 +1449,90 @@ input[type="radio"] {
 .caltalogoSelected{
   background-color: #fff;
   color: #a22244;
+  border-bottom: #a22244 2px solid;
+}
+table, thead, tbody{
+  width: 100%;
+}
+th{
+  font-size: 1.3rem;
+}
+.option{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+td{
+  padding: 0.5rem;
+}
+tr
+td>input{
+  min-width: 100%;
+}
+.evidenaciaButton{
+  padding: 1rem;
+  background-color: #2563eb;
+  color: #fff;
+  margin: 0.5rem;
+}
+.agregarDestino{
+  padding: 0.5rem;
+  background-color: #a22244;
+  border-radius: 5px;
+  margin: 0.5 rem;
+  color: #fff;
+}
+button{
+  transition: all ease 0.5s;
+}
+button:hover{
+  box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px; 
+}
+.impar{
+  background-color: #dddddd;
+}
+.newItem{
+  border: solid #a22244 2px;
+}
+.aceptarPago{
+  padding: 0.5rem;
+  background-color: #282a2b;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0.5rem;
+}
+.denegarPago{
+  padding: 0.5rem;
+  background-color: #a22244;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0.5rem;
+}
+.descargarEvidencia{
+  padding: 0.5rem;
+  background-color: #2563eb;
+  color: #fff;
+  border-radius: 5px;
+  margin: 0.5rem;
+}
+.listadoPiezasPedido{
+  list-style: disc;
+  margin-left: 1rem;
+}
+.pedidoPorConfirmar{
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.guardarCambios{
+
+  padding: 0.5rem;
+  margin: 0.5rem;
+  color: #fff;
+  background-color: #2563eb;
+  border-radius: 5px;
+}
+.politicas{
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
 }

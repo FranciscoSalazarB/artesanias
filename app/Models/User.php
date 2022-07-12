@@ -53,4 +53,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Venta::class,'idUser');
     }
+    public function piezasApartadasSinPagar()
+    {
+        $ultimoApartado = $this->compras[$this->compras->keys()->last()];
+        if($ultimoApartado->status == "espera"){
+            if(date_create($ultimoApartado->fechaLimitePago) < date_create(date('Y-m-d-G'))) return "TRUE";
+        }
+        return "FALSE";
+    }
 }

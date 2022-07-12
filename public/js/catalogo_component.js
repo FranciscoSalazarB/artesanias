@@ -29,6 +29,7 @@ Vue.component('catalogo',{
         async getPiezasByRubro(rubro){
             const res = await this.$http.post(this.ruta+"/piezasInRubro",rubro);
             this.piezas = res.body;
+            console.log(this.piezas)
         },
         piezasApartadas(){
             this.getPiezasByRubro({id : this.rubroSelect});

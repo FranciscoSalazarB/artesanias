@@ -31,6 +31,7 @@ class UserController extends Controller
         foreach($compras as $compra){
             $piezas = [];
             $compra->destino;
+            $compra->evidencia;
             $detalles = $compra->detalles;
             foreach($detalles as $detalle){
                 $pieza = $detalle->pieza;
@@ -62,5 +63,12 @@ class UserController extends Controller
         $venta->status = "porConfirmar";
         $venta->save();
         return url('/');
+    }
+    public function cancelarPedido(Request $req)
+    {
+        $venta = Venta::find($req->input('idPedido'));
+        $venta->status = 'cancelado';
+        $venta->fechaCancelacion = date_create(date('Y-m-d-G'));
+        $venta->save();
     }
 }

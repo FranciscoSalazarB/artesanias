@@ -6,19 +6,19 @@
         <input type="hidden" id="urlPiezas" value="{{route('piezasGet')}}">
         <label>
             <input v-model="select" type="radio" name="almacen" value="ramas" checked>
-            <span>Ramas</span>
+            <span class="spanRadioCustom" :class="select== 'ramas' ? 'caltalogoSelected' : ''">Ramas</span>
         </label>
         <label>
             <input v-model="select" type="radio" name="almacen" value="rubros">
-            <span>Rubros</span>
+            <span class="spanRadioCustom" :class="select== 'rubros' ? 'caltalogoSelected' : ''">Rubros</span>
         </label>
         <label>
             <input v-model="select" type="radio" name="almacen" value="productos">
-            <span>Productos</span>
+            <span class="spanRadioCustom" :class="select== 'productos' ? 'caltalogoSelected' : ''">Productos</span>
         </label>
         <label>
             <input v-model="select" type="radio" name="almacen" value="piezas">
-            <span>Piezas</span>
+            <span class="spanRadioCustom" :class="select== 'piezas' ? 'caltalogoSelected' : ''">Piezas</span>
         </label>
     </form>
 </div>

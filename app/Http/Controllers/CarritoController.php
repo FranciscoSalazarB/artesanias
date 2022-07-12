@@ -13,13 +13,18 @@ class CarritoController extends Controller
 {
     public function getCarrito()
     {
+        $user = Auth::user();
+        $ultimoApartado = $user->compras[$user->compras->keys()->last()];
+        if($ultimoApartado->status == "espera"){
+            if(date_create($ultimoApartado->fechaLimitePago) < date_create(date('Y-m-d-G'))) return response()->json('Nompuede apartar más productos, No haz pagado el último carrito apartado');
+        }
         $res = [];
         if (session()->has('carrito')) {
             $idsPiezas = session('carrito');
             foreach ($idsPiezas as $idPieza) {
                 $pieza = Pieza::find($idPieza);
                 $pieza->fotos;
-                if($this->piezaLibre($pieza)) array_push($res,$pieza);
+                if($pieza->estoyLibre()) array_push($res,$pieza);
             }
             unset($idPieza);
         }
@@ -53,7 +58,7 @@ class CarritoController extends Controller
         $idPiezas = session('carrito');
         foreach($idPiezas as $idPieza){
             $pieza = Pieza::find($idPieza);
-            if(!($this->piezaLibre($pieza))){
+            if(!($pieza->estoyLibre())){
                 array_push($piezasNoDisponibles,$pieza);
                 $this->delPieza($idPieza);
             }
@@ -93,22 +98,6 @@ class CarritoController extends Controller
         $pieza->estatus = "apartado";
         $pieza->save();
     }
-    public function piezaLibre($pieza)
-    {
-        $salida = FALSE;
-        if($pieza->estatus == "activo") $salida = TRUE;
-        if ($pieza->estatus == "apartado") {
-            $ultimaVenta = $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta;
-            if($ultimaVenta->status=="cancelado" or $ultimaVenta->status="denegado") $salida = TRUE;
-            if($ultimaVenta->status == "espera"){
-                if (date_create($ultimaVenta->fechaLimitePago) < date_create(date('Y-m-d')) and count($ultimaVenta->evidencia)== 0) $salida = TRUE;
-            }
-            /*$dif = date_create($pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->fechaLimiteConfirmar)->diff(date_create(date('Y-m-d')));
-            $salida = ($dif->y >= 1 or $dif->m >=1 or $dif->d >=1);
-            $salida = ($salida or $pieza->detalleVenta[$pieza->detalleVenta->keys()->last()]->venta->status == 'cancelado');*/
-        }
-        return $salida;
-    }
     public function delPieza($idPieza)
     {
         $carrito = session('carrito');
@@ -119,29 +108,23 @@ class CarritoController extends Controller
     }
     public function getPedidos()
     {
-        $salida = [];
-        $pedidos = Venta::where('status','espera')->get();
-        $hoy = date_create(date('Y-m-d'));
+        $pedidos = Venta::where('status','porConfirmar')->get();
         foreach($pedidos as $pedido){
-            $limitePago = date_create($pedido->fechaLimiteConfirmar);
-            $dif = $limitePago->diff($hoy);
-            if (!($dif->y >= 1 or $dif->m >=1 or $dif->d >=1)or($hoy<$limitePago)) {
-                $pedido->cliente;
-                $pedido->destino;
-                foreach($pedido->detalles as $detalle){
-                    $detalle->pieza;
-                }
-                unset($detalle);
-                array_push($salida,$pedido);
+            $pedido->cliente;
+            $pedido->destino;
+            foreach($pedido->detalles as $detalle){
+                $detalle->pieza;
             }
+            unset($detalle);
         }
         unset($pedido);
-        return response()->json($salida);
+        return response()->json($pedidos);
     }
     public function pagarPedido(Request $req)
     {
         $venta = Venta::find($req->input('idPedido'));
-        $venta->vendido = TRUE;
+        $venta->status = 'vendido';
+        $venta->fechaConfirmacion = date_create(date('Y-m-d-G'));
         $venta->save();
         foreach($venta->detalles as $detalle){
             $pieza = $detalle->pieza;
@@ -149,5 +132,12 @@ class CarritoController extends Controller
             $pieza->save();
         }
         unset($detalle);
+    }
+    public function denegarPedido(Request $req)
+    {
+        $venta = Venta::find($req->input('idPedido'));
+        $venta->status = 'denegado';
+        $venta->fechaCancelacion = date_create(date('Y-m-d-G'));
+        $venta->save();
     }
 }

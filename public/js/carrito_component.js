@@ -38,10 +38,9 @@ Vue.component('carrito',{
             this.activo = true;
         },
         async agregar(data){
-            var piezaCarrito = data.pieza;
-            piezaCarrito['fotos'] = data.fotos
+            var piezaCarrito = data;
             this.seleccionados.push(piezaCarrito);
-            const pieza = {idPieza:data.pieza.id};
+            const pieza = {idPieza:data.id};
             var response = await this.$http.post(this.rutas.addPieza,pieza);
         },
         async remover(index){

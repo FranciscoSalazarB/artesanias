@@ -23,6 +23,9 @@ Vue.component('pedidosadmin',{
             return precios.reduce(function(acum,value){
                 return acum + value;
             });
+        },
+        async denegar(idPedido){
+            await this.$http.post(this.rutas+'/denegado',{idPedido:idPedido});
         }
     }
 });

@@ -51,6 +51,7 @@ Vue.component('almacen',{
                 this.productos = await this.$http.post(this.urls.productos);
                 this.piezas = await this.$http.post(this.urls.piezas);
                 this.piezas = this.piezas.body;
+                console.log(this.piezas);
                 this.productos = this.productos.body;
             } catch (error) {
                 console.log(error);

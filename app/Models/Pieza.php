@@ -31,4 +31,19 @@ class Pieza extends Model
     {
         return $this->hasMany(VentaDetalle::class,'idPieza');
     }
+    public function estoyLibre()
+    {
+        $salida = FALSE;
+        if($this->estatus == "activo") $salida = TRUE;
+        if ($this->estatus == "apartado")
+        {
+            $ultimaVenta = $this->detalleVenta[$this->detalleVenta->keys()->last()]->venta;
+            if($ultimaVenta->status == "cancelado" or $ultimaVenta->status == "denegado") $salida = TRUE;
+            if($ultimaVenta->status == "espera")
+            {
+                if ( date_create($ultimaVenta->fechaLimitePago) <  date_create(date('Y-m-d-G')) and count($ultimaVenta->evidencia)== 0) $salida = TRUE;
+            }
+        }
+        return $salida;
+    }
 }

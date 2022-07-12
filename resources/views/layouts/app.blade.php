@@ -67,7 +67,7 @@
             async mounted(){
                 var user = await this.$http.post(userRuta);
                 user = user.body;
-                if(user.roll == 'cliente') this.picked = 'main';
+                if(user.roll == 'cliente') this.picked = 'politicas';
                 else this.picked = 'pedidos';
             }
         });

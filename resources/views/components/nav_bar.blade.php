@@ -3,9 +3,13 @@
     <ul>
         <li><a href="https://www.casadelasartesaniaschiapas.gob.mx/#gsc.tab=0" class="button">Sitio Casa de las Artesanías</a></li>
         @auth
+            @if(Auth::user()->piezasApartadasSinPagar())
+            <p>Ya hay piezas apartadas</p>
+            <a href="{{ url('/dashboard') }}" id="dashboardHref" class="button">Panel de Control</a>
+            @else
             <a href="#" class="button" v-on:click="abrir_carrito">Carrito</a>
-            <a href="{{ url('/dashboard') }}" id="dashboardHref" class="button">Panel de Control
-            </a>
+            <a href="{{ url('/dashboard') }}" id="dashboardHref" class="button">Panel de Control</a>
+            @endif
         @else
             @if(Route::currentRouteName() == "login")
                 <a href="{{ route('/') }}" class="button">Regresar</a>

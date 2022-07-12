@@ -64,11 +64,13 @@ Route::post('/carrito/guardar',[CarritoController::class,'GuardarCarrito'])->nam
 Route::post('/cliente',[UserController::class,'cliente'])->name('cliente');
 Route::post('/cliente/compras',[UserController::class,'compras']);
 Route::post('/cliente/addEvidencia',[UserController::class,'addEvidencia']);
+Route::post('/cliente/cancelar',[UserController::class,'cancelarPedido']);
 Route::post('/cliente/destinos',[UserController::class,'destinos'])->name('destinosUser');
 Route::post('/cliente/agregarDestino',[UserController::class,'addDestino'])->name('addDestino');
 
 Route::post('/pedidos',[CarritoController::class,'getPedidos'])->name('adminPedidos');
 Route::post('/pedidos/pagado',[CarritoController::class,'pagarPedido']);
+Route::post('/pedidos/denegado',[CarritoController:: class,'denegarPedido']);
 Route::post('/ajustes',[AjustesController::class,'getAjustes'])->name('ajustes');
 Route::post('/ajustes/guardar',[AjustesController::class,'saveAjustes']);
 

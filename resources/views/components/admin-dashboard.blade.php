@@ -4,13 +4,16 @@
             <div>
                 <input type="hidden" id="rutaPedidos" value = "{{route('adminPedidos')}}">
                 <h1 v-if="pedidosPendientes.length == 0">No hay nuevas compras</h1>
-                <div v-for="pedido in pedidosPendientes">
+                <div v-for="pedido in pedidosPendientes" class="pedidoPorConfirmar">
                     <h4>para @{{pedido.cliente.name}} Con destino a @{{pedido.destino.direccion}}</h4>
                     <h4>pedido @{{pedido.creado}} por un total de $@{{total(pedido.detalles)}}</h4>
-                    <div v-for="detalle in pedido.detalles">
-                        <h4>@{{detalle.pieza.nombre}}  $@{{detalle.pieza.precio}}</h4>
-                    </div>
-                    <button v-on:click="aceptar(pedido.id)">Pagado</button>
+                    <h4>Piezas seleccionadas : </h4>
+                    <ul v-for="detalle in pedido.detalles">
+                        <li class="listadoPiezasPedido">@{{detalle.pieza.nombre}}  $@{{detalle.pieza.precio}}</li>
+                    </ul>
+                    <button class="aceptarPago" v-on:click="aceptar(pedido.id)">Aceptar Pago</button>
+                    <button class="denegarPago" v-on:click="denegar(pedido.id)">Denegar Pago</button>
+                    <button class="descargarEvidencia">Descargar Evidencia de Pago</button>
                 </div>
             </div>
         </pedidosadmin>
@@ -36,7 +39,7 @@
                         <span>Día Límitie de confirmación @{{getDayName(dia.id + parseInt(dia.diasRelativosAvisoDePago) + parseInt(dia.diasRelativosAvisoDeConfirmacion))}}</span>
                     </div>
                 </div>
-                <button v-on:click="guardarCambios">Guardar Cambios</button>
+                <button v-on:click="guardarCambios" class="guardarCambios">Guardar Cambios</button>
             </div>
         </ajustes>
     </div>
