@@ -15,12 +15,12 @@ class ArtesaniasController extends Controller
     }
     public function sendRamas()
     {
-        $ramas = Rama::where('eliminado',FALSE)->get();
+        $ramas = Rama::where('eliminado',FALSE)->orderBy('rama', 'asc')->get();
         return response()->json($ramas);
     }
     public function sendRubros(Request $req){
         $rubrosRes = [];
-        $rubros = Rubro::where('idRama',$req->input('id'))->get();
+        $rubros = Rubro::where('idRama',$req->input('id'))->orderBy('rubro', 'asc')->get();
         foreach($rubros as $rubro){
             if(!$rubro->eliminado){
                 array_push($rubrosRes,$rubro);
@@ -39,6 +39,7 @@ class ArtesaniasController extends Controller
             foreach($piezas as $pieza)
             {
                 $pieza->fotos;
+                $pieza->fotos[0]->url = url('/');
                 $pieza->producto;
                 if($pieza->estoyLibre()) array_push($piezasElegidas,$pieza);
             }

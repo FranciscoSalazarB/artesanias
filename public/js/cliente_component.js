@@ -6,7 +6,9 @@ Vue.component('cliente',{
             ruta:'',
             newDestino:{
                 direccion:'',
-                gps:''
+                cp:'',
+                estado:'',
+                municipio:''
             }
         }
     },

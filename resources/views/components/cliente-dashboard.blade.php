@@ -26,7 +26,7 @@
                 <div>
                     <p>Destinos</p>
                     <div v-for="destino in destinos">
-                        @{{destino.direccion}} @{{destino.cp}}
+                        @{{destino.direccion}} @{{destino.cp}} en el estado de @{{destino.estado}}, municipio @{{destino.municipio}}
                     </div>
                     <destinosagregar inline-template>
                         <div>
@@ -38,6 +38,14 @@
                             <label>
                                 <span>cp</span>
                                 <input type="text" v-model="cp" placeholder="Ingresa el código postal">
+                            </label>
+                            <label>
+                                <span>Estado</span>
+                                <input type="text" v-model="estado" placeholder="Ingresa el Estado dentro del territorio Mexicano">
+                            </label>
+                            <label>
+                                <span>Municipio</span>
+                                <input type="text" v-model="municipio" placeholder="Ingresa el Municio de envío">
                             </label>
                             <label>
                                 <button v-on:click="agregar" class="agregarDestino">Agregar destino</button>

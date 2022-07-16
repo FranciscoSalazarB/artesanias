@@ -3,6 +3,8 @@ Vue.component('destinosagregar',{
         return {
             direccion : "",
             cp : "",
+            estado:"",
+            municipio:"",
             ruta : ""
         }
     },
@@ -13,7 +15,9 @@ Vue.component('destinosagregar',{
         async agregar(){
             var data = {
                 direccion : this.direccion,
-                cp : this.cp
+                cp : this.cp,
+                estado : this.estado,
+                municipio : this.municipio
             };
             await this.$http.post(this.ruta,data);
         }

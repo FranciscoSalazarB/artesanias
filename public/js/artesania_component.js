@@ -7,9 +7,11 @@ Vue.component('artesania',{
     },
     async mounted(){
         await this.$root.$on('removeCarr',(id)=>{
-            if(this.artesania_atributes.id == id) this.remover()
+            if(this.artesania_atributes.id == id) this.removerDelCarrito()
         });
-        this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
+        await this.$root.$on('removeCatalogo',this.removerDelCarrito);
+        await this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
+            console.log(this.artesania_atributes); 
             this.apartado = res;
         });
     },
@@ -18,8 +20,12 @@ Vue.component('artesania',{
             this.$root.$emit('addCarr',this.artesania_atributes);
             this.apartado = true;
         },
-        remover(){
+        removerDelCarrito(){
             this.apartado= false;
+        },
+        removerDelCatalogo(){
+            console.log(this.artesania_atributes);
+            this.$destroy();
         }
     }
 });

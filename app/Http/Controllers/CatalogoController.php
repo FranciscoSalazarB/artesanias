@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Rama;
 use App\Models\Rubro;
 use App\Models\Product;
@@ -139,6 +140,7 @@ class CatalogoController extends Controller
         else{
             foreach($piezas as $pieza){
                 $img = $pieza->fotos;
+                $img[0]->url = url('/');
                 $pieza = array("pieza"=>$pieza,"fotos"=>$img);
             }
             unset($pieza);
@@ -153,6 +155,14 @@ class CatalogoController extends Controller
        $newPieza->codigoAlterno = $req->input('codigoAlterno');
        $newPieza->idProducto = $req->input('idProducto');
        $newPieza->save();
+       $img = $req->file('img')->store('public/imgPieza');
+       $url = Storage::url($img);
+       $newFoto = new Foto;
+       $newFoto->nombreArchivo = $url;
+       $newFoto->url = "";
+       $newFoto->eliminado = FALSE;
+       $newFoto->idPieza = $newPieza->id;
+       $newFoto->save();
     }
     public function editPieza(Request $req)
     {

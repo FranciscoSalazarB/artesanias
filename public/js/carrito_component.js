@@ -78,9 +78,10 @@ Vue.component('carrito',{
     computed:{
         costoTotal(){
             var precios = this.seleccionados.map(pieza=>pieza.precio);
-            return precios.reduce(function(acum,precio){
+            var total = 100 + precios.reduce(function(acum,precio){
                 return acum + precio;
             });
+            return total
         }
     }
 })

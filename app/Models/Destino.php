@@ -12,7 +12,9 @@ class Destino extends Model
     protected $fillable = [
         'idUsuario',
         'dirección',
-        'cp'
+        'cp',
+        'estado',
+        'municipio'
     ];
     public $timestamps = false;
 }

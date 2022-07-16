@@ -3,7 +3,7 @@
         <pedidosadmin inline-template>
             <div>
                 <input type="hidden" id="rutaPedidos" value = "{{route('adminPedidos')}}">
-                <h1 v-if="pedidosPendientes.length == 0">No hay nuevas compras</h1>
+                <h1 v-if="pedidosPendientes.length == 0">No hay nuevos pedidos</h1>
                 <div v-for="pedido in pedidosPendientes" class="pedidoPorConfirmar">
                     <h4>para @{{pedido.cliente.name}} Con destino a @{{pedido.destino.direccion}}</h4>
                     <h4>pedido @{{pedido.creado}} por un total de $@{{total(pedido.detalles)}}</h4>

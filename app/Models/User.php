@@ -55,10 +55,11 @@ class User extends Authenticatable
     }
     public function piezasApartadasSinPagar()
     {
+        if(count($this->compras) == 0) return FALSE;
         $ultimoApartado = $this->compras[$this->compras->keys()->last()];
         if($ultimoApartado->status == "espera"){
-            if(date_create($ultimoApartado->fechaLimitePago) < date_create(date('Y-m-d-G'))) return "TRUE";
+            if(date_create($ultimoApartado->fechaLimitePago) > date_create(date('Y-m-d-G'))) return TRUE;
         }
-        return "FALSE";
+        return FALSE;
     }
 }

@@ -8,6 +8,6 @@ $classes = ($active ?? false)
 
 @if(Auth::user()->roll == "cliente")
 <a href="{{ route('/') }}" {{ $attributes->merge(['class' => $classes]) }}>
-    regrasar
+    regresar
 </a>
 @endif

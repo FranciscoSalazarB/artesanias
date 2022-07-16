@@ -14,10 +14,7 @@ class CarritoController extends Controller
     public function getCarrito()
     {
         $user = Auth::user();
-        $ultimoApartado = $user->compras[$user->compras->keys()->last()];
-        if($ultimoApartado->status == "espera"){
-            if(date_create($ultimoApartado->fechaLimitePago) < date_create(date('Y-m-d-G'))) return response()->json('Nompuede apartar más productos, No haz pagado el último carrito apartado');
-        }
+        if($user->piezasApartadasSinPagar()) return response()->json('Nompuede apartar más productos, No haz pagado el último carrito apartado');
         $res = [];
         if (session()->has('carrito')) {
             $idsPiezas = session('carrito');

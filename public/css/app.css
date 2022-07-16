@@ -1536,3 +1536,10 @@ button:hover{
   font-size: 1.2rem;
   font-weight: bold;
 }
+#tablePiezas{
+  transform: rotateX(180deg);
+}
+#divPiezas{
+  overflow-x: scroll;
+  transform: rotateX(180deg);
+}
