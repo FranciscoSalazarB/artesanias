@@ -45,6 +45,10 @@ Vue.component('cliente-compras',{
         async subirEvidencia(){
             const res = await this.$http.post(this.ruta+'/addEvidencia',this.evidenciaASuvir);
             console.log(res);
+        },
+        async cancelarPedido(pedido){
+            var req = {idPedido:pedido}
+            const res = await this.$http.post(this.ruta+'/cancelar');
         }
     }
 });

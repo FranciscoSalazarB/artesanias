@@ -105,8 +105,9 @@ class CarritoController extends Controller
     }
     public function getPedidos()
     {
-        $pedidos = Venta::where('status','porConfirmar')->get();
+        $pedidos = Venta::where('status','porConfirmar')->orWhere('status','confirmado')->get();
         foreach($pedidos as $pedido){
+            $pedido->evidencia;
             $pedido->cliente;
             $pedido->destino;
             foreach($pedido->detalles as $detalle){
@@ -120,7 +121,7 @@ class CarritoController extends Controller
     public function pagarPedido(Request $req)
     {
         $venta = Venta::find($req->input('idPedido'));
-        $venta->status = 'vendido';
+        $venta->status = 'confirmado';
         $venta->fechaConfirmacion = date_create(date('Y-m-d-G'));
         $venta->save();
         foreach($venta->detalles as $detalle){
@@ -135,6 +136,13 @@ class CarritoController extends Controller
         $venta = Venta::find($req->input('idPedido'));
         $venta->status = 'denegado';
         $venta->fechaCancelacion = date_create(date('Y-m-d-G'));
+        $venta->save();
+    }
+    public function subirGuiaEnvio(Request $req)
+    {
+        $venta = Venta::find($req->input('idPedido'));
+        $venta->referenciaEnvio = $req->input('referencia');
+        $venta->status = 'vendido';
         $venta->save();
     }
 }

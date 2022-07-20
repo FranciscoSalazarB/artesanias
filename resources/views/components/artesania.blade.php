@@ -17,5 +17,6 @@
         @guest
             <a href="{{route('login')}}" class="piezaIniciarSesion">Inicie sesión para comprar</a>
         @endguest
+        <p>@{{apartado}}</p>
     </div>
 </artesania>

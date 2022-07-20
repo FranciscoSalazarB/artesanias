@@ -73,7 +73,7 @@
                     <div class="evidencia" v-if="!compra.venta.caducado">
                         <input type="file" v-on:change="addEvidencia" acepted="imge/*">
                         <button class="subirEvidencia" v-on:click="subirEvidencia">Subir evidencia de pago</button>
-                        <button class="cancelarPedido">Cancelar Pedido</button>
+                        <button class="cancelarPedido" v-on:click="cancelarPedido(compra.venta.id)">Cancelar Pedido</button>
                     </div>
                     <div class="evidencia" v-if="compra.venta.evidencia.length > 0">
                         <button class = "evidenaciaButton">Descargar Evidencia</button>

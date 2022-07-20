@@ -35,6 +35,7 @@
         <script src="{{asset('js/admin_pedidos.js')}}"></script>
         <script src="{{asset('js/ajustes_admin.js')}}"></script>
         @endif
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 fondo">

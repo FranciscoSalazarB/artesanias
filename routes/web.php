@@ -71,6 +71,7 @@ Route::post('/cliente/agregarDestino',[UserController::class,'addDestino'])->nam
 Route::post('/pedidos',[CarritoController::class,'getPedidos'])->name('adminPedidos');
 Route::post('/pedidos/pagado',[CarritoController::class,'pagarPedido']);
 Route::post('/pedidos/denegado',[CarritoController:: class,'denegarPedido']);
+Route::post('/pedidos/referencia',[CarritoController::class,'subirGuiaEnvio']);
 Route::post('/ajustes',[AjustesController::class,'getAjustes'])->name('ajustes');
 Route::post('/ajustes/guardar',[AjustesController::class,'saveAjustes']);
 

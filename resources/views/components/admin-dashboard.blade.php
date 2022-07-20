@@ -3,6 +3,7 @@
         <pedidosadmin inline-template>
             <div>
                 <input type="hidden" id="rutaPedidos" value = "{{route('adminPedidos')}}">
+                <input type="hidden" id="root" value = "{{route('/')}}">
                 <h1 v-if="pedidosPendientes.length == 0">No hay nuevos pedidos</h1>
                 <div v-for="pedido in pedidosPendientes" class="pedidoPorConfirmar">
                     <h4>para @{{pedido.cliente.name}} Con destino a @{{pedido.destino.direccion}}</h4>
@@ -11,9 +12,11 @@
                     <ul v-for="detalle in pedido.detalles">
                         <li class="listadoPiezasPedido">@{{detalle.pieza.nombre}}  $@{{detalle.pieza.precio}}</li>
                     </ul>
-                    <button class="aceptarPago" v-on:click="aceptar(pedido.id)">Aceptar Pago</button>
-                    <button class="denegarPago" v-on:click="denegar(pedido.id)">Denegar Pago</button>
-                    <button class="descargarEvidencia">Descargar Evidencia de Pago</button>
+                    <button class="aceptarPago" v-on:click="aceptar(pedido.id)" v-if="pedido.status == 'porConfirmar'">Aceptar Pago</button>
+                    <button class="denegarPago" v-on:click="denegar(pedido.id)" v-if="pedido.status == 'porConfirmar'">Denegar Pago</button>
+                    <button class="aceptarPago" v-on:click="subirGuiaEnvio(pedido.id)" v-if="pedido.status == 'confirmado'">Subir Guía de envío</button>
+                    <input type="text" v-model="pedido.referenciaEnvio" v-if="pedido.status == 'confirmado'">
+                    <button class="descargarEvidencia"><a :href="root + pedido.evidencia[0].nombreArchivo">Descargar Evidencia de Pago</a></button>
                 </div>
             </div>
         </pedidosadmin>

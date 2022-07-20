@@ -28,7 +28,6 @@ Vue.component('catalogo',{
         },
         async getPiezasByRubro(rubro){
             const res = await this.$http.post(this.ruta+"/piezasInRubro",rubro);
-            await this.$root.$emit('removeCatalogo');
             this.piezas = res.body;
             console.log(this.piezas)
         },

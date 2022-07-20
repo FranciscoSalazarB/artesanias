@@ -24,7 +24,7 @@
             .catalogoHeader{
                 background-image: url({{asset('img/museo-artesanias-chiapas.jpg')}});
                 background-size : cover;
-            }
+            }.{}
         </style>
         <link rel="stylesheet" href="{{asset('css/index.css')}}">
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -32,6 +32,7 @@
         <script src="{{asset('js/catalogo_component.js')}}"></script>
         <script src="{{asset('js/artesania_component.js')}}"></script>
         <script src="{{asset('js/carrito_component.js')}}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body class="antialiased">
         <div id="app">

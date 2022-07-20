@@ -51,27 +51,48 @@ Vue.component('carrito',{
             const res = await this.$http.post(this.rutas.removePieza,pieza);
         },
         async guardar(){
-            if(confirm('¿Está seguro de apartar estos productos?')){
-                var ruta = {idDestino : this.destinoSelect};
-                var res = await this.$http.post(this.rutas.guardar, ruta);
-                res = res.body
-                console.log(res);
-                if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
-                else{
-                    this.seleccionados = await this.seleccionados.filter(function(pieza){
-                        piezaEliminada = false;
-                        res.forEach(item=>{
-                            if(item.id == pieza.id){
-                                piezaEliminada = true;
-                            }
-                        });
-                        return !piezaEliminada;
-                    });
-                    this.$emit('piezasApartadas');
-                    alert('Algunas piezas ya están apartadas');
-                }
+            if(this.destinoSelect == ""){
+                Swal.fire({
+                    icon:'error',
+                    title:'Error!',
+                    text:'Necesitas haber seleccionado un destino para poder apartar este pedido',
+                    footer:'<a href="'+ document.getElementById('dashboardHref').href +'">Si no tienes destinos agregados, da clic aquí</a>'
+                });
             } else {
-                console.log(this.destinoSelect);
+                Swal.fire({
+                    title:'¿Está seguro de apartar estos productos?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Apartar',
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText:'Cancelar'
+                }).then(result=>{
+                    if(result.isConfirmed){
+                        var ruta = {idDestino : this.destinoSelect};
+                        var res = this.$http.post(this.rutas.guardar, ruta);
+                        res = res.body
+                        console.log(res);
+                        if (res.length < 1) window.location = document.getElementById('dashboardHref').href;
+                        else{
+                            this.seleccionados = this.seleccionados.filter(function(pieza){
+                                piezaEliminada = false;
+                                res.forEach(item=>{
+                                    if(item.id == pieza.id){
+                                        piezaEliminada = true;
+                                    }
+                                });
+                                return !piezaEliminada;
+                            });
+                            this.$emit('piezasApartadas');
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Hay piezas apartadas en este pedido'
+                            });
+                        }
+                    } else {
+                        console.log(this.destinoSelect);
+                    }
+                });
             }
         }
     },

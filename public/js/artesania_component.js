@@ -10,10 +10,7 @@ Vue.component('artesania',{
             if(this.artesania_atributes.id == id) this.removerDelCarrito()
         });
         await this.$root.$on('removeCatalogo',this.removerDelCarrito);
-        await this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
-            console.log(this.artesania_atributes); 
-            this.apartado = res;
-        });
+        await this.preguntarAlCarrito();
     },
     methods:{
         agregar(){
@@ -23,9 +20,16 @@ Vue.component('artesania',{
         removerDelCarrito(){
             this.apartado= false;
         },
-        removerDelCatalogo(){
-            console.log(this.artesania_atributes);
-            this.$destroy();
+        async preguntarAlCarrito(){
+            await this.$root.$emit('estoyEnCarrito',this.artesania_atributes.id, (res)=>{
+                console.log(this.artesania_atributes); 
+                this.apartado = res;
+            });
+        }
+    },
+    watch:{
+        async artesania_atributes(newDato){
+            await this.preguntarAlCarrito()
         }
     }
 });
