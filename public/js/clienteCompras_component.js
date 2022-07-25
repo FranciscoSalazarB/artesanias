@@ -24,7 +24,7 @@ Vue.component('cliente-compras',{
     methods:{
         total(piezas){
             const precios = piezas.map(pieza=>pieza.precio);
-            return precios.reduce(function(acum,value){
+            return 100 + precios.reduce(function(acum,value){
                 return acum + value;
             });
         },
@@ -43,12 +43,69 @@ Vue.component('cliente-compras',{
             return pedido.venta;
         },
         async subirEvidencia(){
-            const res = await this.$http.post(this.ruta+'/addEvidencia',this.evidenciaASuvir);
-            console.log(res);
+            Swal.fire({
+                title:'¿Está seguro de subir esta evidencia de pago?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Subir evidencia',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    try {
+                        let res = await this.$http.post(this.ruta+'/addEvidencia',this.evidenciaASuvir);
+                        res = res.body;
+                        if (res.length > 0) {
+                            Swal.fire({
+                                title : 'Error',
+                                icon : 'error',
+                                text : res
+                            });
+                        } else {
+                            Swal.fire({
+                                title : 'Se a subido correctamente la evidencia',
+                                icon : 'success',
+                            });
+                        }
+                        
+                    } catch (error) {
+                        Swal.fire({
+                            title : 'Error',
+                            icon : 'error',
+                            text : 'Hubo un error al subir la evidencia, inténtelo más tarde'
+                        });
+                    }
+                }
+            });
         },
         async cancelarPedido(pedido){
-            var req = {idPedido:pedido}
-            const res = await this.$http.post(this.ruta+'/cancelar');
+            Swal.fire({
+                title:'¿Está seguro de cancelar este pedido?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Cancelar Pedido',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'regresar'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    var req = {idPedido:pedido}
+                    try {
+                        await this.$http.post(this.ruta+'/cancelar',req);
+                        Swal.fire({
+                            title : 'Pedido cancelado correctamente',
+                            icon: 'success'
+                        });
+                    } catch (error) {
+                        Swal.fire({
+                            title: 'Error',
+                            icon : 'error',
+                            text : 'Algo salió mal, intenta cancelar este pedido más tarde'
+                        })
+                    }
+                }
+            });
         }
     }
 });

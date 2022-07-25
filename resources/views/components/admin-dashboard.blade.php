@@ -21,6 +21,25 @@
             </div>
         </pedidosadmin>
     </div>
+    <div v-if="picked == 'historico'">
+        <historico inline-template>
+            <div>
+                <input type="hidden" id="historicoPedidos" value="{{route('historico')}}">
+                <div v-for ="pedidos in listado" class="listado">
+                    Estatus : @{{pedidos.status}}<br>
+                    Pedido el : @{{pedidos.created_at}}<br>
+                    Cliente : @{{pedidos.cliente.name}}, @{{pedidos.cliente.email}}<br>
+                    Destino : @{{pedidos.destino.direccion}} Estado de @{{pedidos.destino.estado}} municipio @{{pedidos.destino.municipio}}  localidad @{{pedidos.destino.localidad}}<br>
+                    CP : @{{pedidos.destino.cp}}<br>
+                    <div v-for = "piezas in pedidos.detalles" class="productos">
+                        *@{{piezas.pieza.nombre}}<br>
+                        $@{{piezas.pieza.precio}}<br>
+                        Código : @{{piezas.pieza.codigoAlterno}}
+                    </div>
+                </div>
+            </div>
+        </historico>
+    </div>
     <div v-if="picked == 'almacen'">
         <almacen inline-template>
             <div>

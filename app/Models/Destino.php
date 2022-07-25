@@ -14,7 +14,8 @@ class Destino extends Model
         'dirección',
         'cp',
         'estado',
-        'municipio'
+        'municipio',
+        'localidad'
     ];
     public $timestamps = false;
 }

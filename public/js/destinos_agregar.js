@@ -5,6 +5,7 @@ Vue.component('destinosagregar',{
             cp : "",
             estado:"",
             municipio:"",
+            localidad:"",
             ruta : ""
         }
     },

@@ -34,6 +34,7 @@
         <script src="{{asset('js/almacen_component.js')}}"></script>
         <script src="{{asset('js/admin_pedidos.js')}}"></script>
         <script src="{{asset('js/ajustes_admin.js')}}"></script>
+        <script src="{{asset('js/historico_pedidos.js')}}"></script>
         @endif
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>

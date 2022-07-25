@@ -19,6 +19,7 @@ class Destino extends Migration
             $table->string('cp');
             $table->string('estado');
             $table->string('municipio');
+            $table->string('localidad');
             $table->unsignedBigInteger('idUser');
             $table->foreign('idUser')->references('id')->on('user');
         });

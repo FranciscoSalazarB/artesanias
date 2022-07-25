@@ -1408,8 +1408,14 @@ select {
   padding: 1rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
   box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px;
+}
+.compraDatos{
+  margin-right: 3rem;
+}
+.compraOpciones{
+  justify-self: flex-end;
 }
 .evidencia{
   display: flex;
@@ -1542,4 +1548,24 @@ button:hover{
 #divPiezas{
   overflow-x: scroll;
   transform: rotateX(180deg);
+}.inputDestino{
+  margin: 0.5rem;
+}
+.politicaContainer{
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px; 
+}
+.listado{
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: rgb(14, 21, 29) 0px 10px 15px -10px; 
+}
+.productos{
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: #a22244;
+  color: #fff;
 }

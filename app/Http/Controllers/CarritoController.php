@@ -145,4 +145,18 @@ class CarritoController extends Controller
         $venta->status = 'vendido';
         $venta->save();
     }
+    public function historico()
+    {
+        $pedidos = Venta::whereIn('status',array('confirmado','cancelado','denegado'))->get();
+        foreach($pedidos as $pedido){
+            $pedido->cliente;
+            $pedido->destino;
+            foreach($pedido->detalles as $detalle){
+                $detalle->pieza;
+            }
+            unset($detalle);
+        }
+        unset($pedido);
+        return response()->json($pedidos);
+    }
 }

@@ -40,7 +40,10 @@
                 </label>
             </form>
         </div>
-        <div class="catalogo" v-if="ramas.length !== 0">
+        <div v-if="piezas.length === 0" class="artesaniasNulas">
+                <p>No hay Artesanías en esta sección</p>
+            </div>
+        <div class="catalogo" v-if="piezas.length !== 0">
             <div class="card_container" v-for= "artesania in piezas">
                 <x-artesania/>
             </div>

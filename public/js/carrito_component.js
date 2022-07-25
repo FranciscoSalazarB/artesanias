@@ -60,16 +60,17 @@ Vue.component('carrito',{
                 });
             } else {
                 Swal.fire({
-                    title:'¿Está seguro de apartar estos productos?',
+                    title:'¿Está seguro de apartar estas artesanías?',
                     showDenyButton: true,
+                    icon: 'warning',
                     confirmButtonText: 'Apartar',
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     cancelButtonText:'Cancelar'
-                }).then(result=>{
+                }).then(async result=>{
                     if(result.isConfirmed){
                         var ruta = {idDestino : this.destinoSelect};
-                        var res = this.$http.post(this.rutas.guardar, ruta);
+                        var res = await this.$http.post(this.rutas.guardar, ruta);
                         res = res.body
                         console.log(res);
                         if (res.length < 1) window.location = document.getElementById('dashboardHref').href;

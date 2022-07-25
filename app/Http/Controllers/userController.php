@@ -50,6 +50,7 @@ class UserController extends Controller
         $nuevoDestino->cp = $req->input('cp');
         $nuevoDestino->estado = $req->input('estado');
         $nuevoDestino->municipio = $req->input('municipio');
+        $nuevoDestino->localidad = $req->input('localidad');
         $nuevoDestino->idUser = Auth::id();
         $nuevoDestino->save();
     }
