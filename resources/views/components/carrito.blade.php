@@ -18,7 +18,10 @@
                         <option :value="destino.id" v-for="destino in destinos">@{{destino.direccion}}</option>
                     </select>
                 </div>
-                <a href="#" class="comprar" v-on:click="guardar">Realizar Pedido por $@{{costoTotal}}</a>
+                <div>
+                    <p id="cuentaNum">Numero de cuenta : 4152 3136 6112 8970</p>
+                    <a href="#" class="comprar" v-on:click="guardar">Realizar Pedido por $@{{costoTotal}}</a>
+                </div>
             </div>
         </div>
     </div>

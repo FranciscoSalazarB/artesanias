@@ -26,7 +26,7 @@
             <div>
                 <input type="hidden" id="historicoPedidos" value="{{route('historico')}}">
                 <div v-for ="pedidos in listado" class="listado">
-                    Estatus : @{{pedidos.status}}<br>
+                    Estatus : @{{pedidos.status == 'espera'  ? 'caducado' : pedidos.status}}<br>
                     Pedido el : @{{pedidos.created_at}}<br>
                     Cliente : @{{pedidos.cliente.name}}, @{{pedidos.cliente.email}}<br>
                     Destino : @{{pedidos.destino.direccion}} Estado de @{{pedidos.destino.estado}} municipio @{{pedidos.destino.municipio}}  localidad @{{pedidos.destino.localidad}}<br>

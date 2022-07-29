@@ -56,6 +56,7 @@ Vue.component('cliente-compras',{
                     try {
                         let res = await this.$http.post(this.ruta+'/addEvidencia',this.evidenciaASuvir);
                         res = res.body;
+                        console.log(res)
                         if (res.length > 0) {
                             Swal.fire({
                                 title : 'Error',

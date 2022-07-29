@@ -82,7 +82,7 @@
             <div v-if="compras.length != 0">
                 <div v-for="compra in compras" class="compra">
                     <div class="compraDatos">
-                        <p>Estatus : @{{compra.venta.status}}</p>
+                        <p>Estatus : @{{compra.venta.status == 'espera' && compra.venta.caducado ? 'caducado' : compra.venta.status}}</p>
                         <p>Pedido @{{compra.venta.creado}} el @{{compra.venta.created_at}}</p>
                         <p>El tiempo para subir la evidencia @{{ compra.venta.caducado ? 'ha vencido': 'vence '+compra.venta.caduca}} el @{{compra.venta.fechaLimitePago}}</p>
                         <p>Total $@{{total(compra.piezas)}}</p>
@@ -90,8 +90,9 @@
                         <div v-for="pieza in compra.piezas">
                             @{{pieza.nombre}}, $@{{pieza.precio}}
                         </div>
+                        <p>Numero de cuenta : 4152 3136 6112 8970</p>
                     </div>
-                    <div class="evidencia compraOpciones" v-if="!compra.venta.caducado">
+                    <div class="evidencia compraOpciones" v-if="!compra.venta.caducado && compra.venta.status == 'espera'">
                         <input type="file" v-on:change="addEvidencia" acepted="imge/*">
                         <button class="subirEvidencia" v-on:click="subirEvidencia">Subir evidencia de pago</button>
                         <button class="cancelarPedido" v-on:click="cancelarPedido(compra.venta.id)">Cancelar Pedido</button>

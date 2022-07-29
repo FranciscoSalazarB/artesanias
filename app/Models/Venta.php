@@ -40,4 +40,14 @@ class Venta extends Model
     {
         return $this->hasMany(Evidencia::class,'idVenta');
     }
+    public function caducado()
+    {
+        $salida = FALSE;
+        if($this->status == "cancelado" or $this->status == "denegado") $salida = TRUE;
+        if($this->status == "espera")
+        {
+            if ( date_create($this->fechaLimitePago) <  date_create(date('Y-m-d-G')) and count($this->evidencia)== 0) $salida = TRUE;
+        }
+        return $salida;
+    }
 }

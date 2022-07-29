@@ -69,6 +69,7 @@ Vue.component('carrito',{
                     cancelButtonText:'Cancelar'
                 }).then(async result=>{
                     if(result.isConfirmed){
+                        console.log(this.destinoSelect)
                         var ruta = {idDestino : this.destinoSelect};
                         var res = await this.$http.post(this.rutas.guardar, ruta);
                         res = res.body

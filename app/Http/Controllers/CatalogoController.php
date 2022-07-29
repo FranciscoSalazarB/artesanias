@@ -186,8 +186,4 @@ class CatalogoController extends Controller
             $piezaReset->save();
         }
     }
-    public function addImg(Request $req)
-    {
-        
-    }
 }
