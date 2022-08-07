@@ -9,17 +9,37 @@ Vue.component('pedidosadmin',{
     async mounted(){
         this.rutas = document.getElementById('rutaPedidos').value;
         this.root = document.getElementById('root').value
-        this.pedidosPendientes = await this.$http.post(this.rutas);
-        this.pedidosPendientes = this.pedidosPendientes.body;
-        this.pedidosPendientes = this.pedidosPendientes.map(function (pedido) {
-            pedido.creado = moment(pedido.created_at).fromNow();
-            return pedido;
-        })
+        await this.getPendiente();
         console.log(this.pedidosPendientes)
     },
     methods:{
+        async getPendiente(){
+            this.pedidosPendientes = await this.$http.post(this.rutas);
+            this.pedidosPendientes = this.pedidosPendientes.body;
+            this.pedidosPendientes = this.pedidosPendientes.map(function (pedido) {
+                pedido.creado = moment(pedido.created_at).fromNow();
+                return pedido;
+            });
+        },
         async aceptar(idPedido){
-            await this.$http.post(this.rutas+'/pagado',{idPedido:idPedido});
+            Swal.fire({
+                title:'¿Está seguro de aceptar el pago de este pedido?',
+                showDenyButton: true,
+                icon: 'warning',
+                confirmButtonText: 'Aceptar Pago',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'Cancelar'
+            }).then(async result => {
+                if (result.isConfirmed) {
+                    await this.$http.post(this.rutas+'/pagado',{idPedido:idPedido});
+                    Swal.fire({
+                        title : 'Pedido Aceptado',
+                        icon: 'success'
+                    });
+                    this.getPendiente();
+                }
+            });
         },
         total(detalles){
             var precios = detalles.map(detalle=>detalle.pieza.precio);
@@ -28,15 +48,48 @@ Vue.component('pedidosadmin',{
             });
         },
         async denegar(idPedido){
-            await this.$http.post(this.rutas+'/denegado',{idPedido:idPedido});
+            Swal.fire({
+                title:'¿Está seguro de denegar este pedido?',
+                showDenyButton: true,
+                icon: 'warning',
+                confirmButtonText: 'Denegar Pago',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'Cancelar'
+            }).then(async result => {
+                if (result.isConfirmed){
+                    await this.$http.post(this.rutas+'/denegado',{idPedido:idPedido});
+                    Swal.fire({
+                        title : 'Pedido Denegado',
+                        icon: 'success'
+                    });
+                    this.getPendiente();
+                }
+            });
         },
         async subirGuiaEnvio(idPedido){
-            var res = await {
-                idPedido:idPedido,
-                referencia : await this.findPedidoRef(idPedido)
-            }
-            console.log(res);
-            await this.$http.post(this.rutas+'/referencia', res);
+            Swal.fire({
+                title:'¿Está seguro de subir la gía para este pedido?',
+                showDenyButton: true,
+                icon: 'warning',
+                confirmButtonText: 'Aceptar Pago',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'Cancelar'
+            }).then(async result => {
+                if (result.isConfirmed){
+                    var res = {
+                        idPedido:idPedido,
+                        referencia : await this.findPedidoRef(idPedido)
+                    }
+                    await this.$http.post(this.rutas+'/referencia', res);
+                    Swal.fire({
+                        title : 'Referencia correctamente subida',
+                        icon: 'success'
+                    });
+                    this.getPendiente();
+                }
+            });
         },
         async findPedidoRef(idPedido){
             return this.pedidosPendientes.find((pedido) => {return pedido.id == idPedido}).referenciaEnvio;

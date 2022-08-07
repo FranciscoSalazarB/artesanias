@@ -135,6 +135,7 @@ class CarritoController extends Controller
     {
         $venta = Venta::find($req->input('idPedido'));
         $venta->status = 'denegado';
+        $venta->motivo = $req->input('motivo');
         $venta->fechaCancelacion = date_create(date('Y-m-d-G'));
         $venta->save();
     }

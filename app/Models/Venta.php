@@ -17,6 +17,7 @@ class Venta extends Model
         'status',
         'referenciaEnvio',
         'fechaLimitePago',
+        'motivo',
         'fechaLimiteConfirmar',
         'fechaConfirmacion',
         'fechaCancelacion',

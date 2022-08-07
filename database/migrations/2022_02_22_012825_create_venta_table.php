@@ -22,6 +22,7 @@ class CreateVentaTable extends Migration
             $table->dateTime('fechaLimiteConfirmar',$precision = 0);
             $table->dateTime('fechaConfirmacion',$precision = 0)->nullable();
             $table->dateTime('fechaCancelacion',$precision = 0)->nullable();
+            $table->string('motivo')->nullable();
             $table->unsignedBigInteger('idUser');
             $table->unsignedBigInteger('idDestino');
         });

@@ -23,13 +23,29 @@ Vue.component('ajustes',{
             if(day == 7) return 'Domingo';
         },
         async guardarCambios(){
-            var data = this.dias.map(function(dia){
-                dia.diasRelativosAvisoDeConfirmacion = parseInt(dia.diasRelativosAvisoDeConfirmacion);
-                dia.diasRelativosAvisoDePago = parseInt(dia.diasRelativosAvisoDePago);
-                return dia;
-            })
-            var a = await this.$http.post(this.ruta+'/guardar',{cambios:data});
-            console.log(a);
+            Swal.fire({
+                title:'¿Está seguro de guardar los cambios realizados?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Guardar cambios',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    var data = this.dias.map(function(dia){
+                        dia.diasRelativosAvisoDeConfirmacion = parseInt(dia.diasRelativosAvisoDeConfirmacion);
+                        dia.diasRelativosAvisoDePago = parseInt(dia.diasRelativosAvisoDePago);
+                        return dia;
+                    });
+                    var a = await this.$http.post(this.ruta+'/guardar',{cambios:data});
+                    console.log(a);
+                    Swal.fire({
+                        title : 'Los cambios se guardaron correctamente',
+                        icon : 'success',
+                    });
+                }
+            });
         }
     },
     watch:{

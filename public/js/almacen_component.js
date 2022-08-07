@@ -43,20 +43,31 @@ Vue.component('almacen',{
         this.select = 'ramas'
     },
     methods:{
-        async getAlmacen(){
+        getAlmacen(){
             try {
-                this.ramas = await this.$http.post(this.urls.ramas);
-                this.ramas = this.ramas.body;
-                this.rubros = await this.$http.post(this.urls.rubros);
-                this.rubros = this.rubros.body;
-                this.productos = await this.$http.post(this.urls.productos);
-                this.piezas = await this.$http.post(this.urls.piezas);
-                this.piezas = this.piezas.body;
-                console.log(this.piezas);
-                this.productos = this.productos.body;
+                this.getRamas();
+                this.getRubros();
+                this.getProductos();
+                this.getPiezas();
             } catch (error) {
                 console.log(error);
             }
+        },
+        async getRamas(){
+            this.ramas = await this.$http.post(this.urls.ramas);
+            this.ramas = this.ramas.body;
+        },
+        async getRubros(){
+            this.rubros = await this.$http.post(this.urls.rubros);
+            this.rubros = this.rubros.body;
+        },
+        async getProductos(){
+            this.productos = await this.$http.post(this.urls.productos);
+            this.productos = this.productos.body;
+        },
+        async getPiezas(){
+            this.piezas = await this.$http.post(this.urls.piezas);
+            this.piezas = this.piezas.body;
         },
         findRama(idRama){
             const rama = this.ramas.find(rama=>{
@@ -77,46 +88,136 @@ Vue.component('almacen',{
             return Producto;
         },
         async addRama(){
-            await this.$http.post(this.urls.ramas+"/add",this.newRama);
+            Swal.fire({
+                title:'¿Está seguro de agregar una nueva rama?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Guardar rama',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    await this.$http.post(this.urls.ramas+"/add",this.newRama);
+                    Swal.fire({
+                        title : 'La nueva rama se ha agregado correctamente',
+                        icon : 'success',
+                    });
+                    this.getRamas();
+                }
+            });
         },
         async delRama(rama){
-            rama.eliminado = true;
-            await this.$http.post(this.urls.ramas+"/del",rama);
+            Swal.fire({
+                title:'¿Está seguro de eliminar esta rama?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Eliminar rama',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    await this.$http.post(this.urls.ramas+"/del",rama);
+                    Swal.fire({
+                        title : 'La rama se ha eliminado correctamente',
+                        icon : 'success',
+                    });
+                    this.getRamas();
+                }
+            });
         },
         async editRama(rama){
-            await this.$http.post(this.urls.ramas+"/edit",rama);
+            Swal.fire({
+                title:'¿Está seguro de editar esta rama?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Editar rama',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    await this.$http.post(this.urls.ramas+"/edit",rama);
+                    Swal.fire({
+                        title : 'La rama se ha editado correctamente',
+                        icon : 'success',
+                    });
+                    this.getRamas();
+                }
+            });
         },
         async resetRama(rama){
-            rama.eliminado = false;
-            await this.$http.post(this.urls.ramas+"/reset",rama);
+            Swal.fire({
+                title:'¿Está seguro de restaurar esta rama?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Restaurar rama',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    await this.$http.post(this.urls.ramas+"/reset",rama);
+                    Swal.fire({
+                        title : 'La rama se ha erestaurado correctamente',
+                        icon : 'success',
+                    });
+                    this.getRamas();
+                }
+            });
         },
         async addRubro(){
-            await this.$http.post(this.urls.rubros+"/add",this.newRubro);
+            Swal.fire({
+                title:'¿Está seguro de agregar este rubro?',
+                icon: 'warning',
+                showDenyButton: true,
+                confirmButtonText: 'Agregar rubro',
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText:'cancelar'
+            }).then(async result => {
+                if(result.isConfirmed){
+                    await this.$http.post(this.urls.rubros+"/add",this.newRubro);
+                    Swal.fire({
+                        title : 'El rubro se ha agregado correctamente',
+                        icon : 'success',
+                    });
+                    this.getRubros();
+                }
+            });
         },
         async editRubro(rubro){
             await this.$http.post(this.urls.rubros+"/edit",rubro);
+            this.getRubros();
         },
         async delRubro(rubro){
             rubro.eliminado = true;
             await this.$http.post(this.urls.rubros+'/del',rubro);
+            this.getRubros();
         },
         async resetRubro(rubro){
             rubro.eliminado = false;
             await this.$http.post(this.urls.rubros+'/reset',rubro);
+            this.getRubros();
         },
         async addProducto(){
             await this.$http.post(this.urls.productos+"/add",this.newProducto);
+            this.getProductos();
         },
         async editProducto(producto){
             await this.$http.post(this.urls.productos+"/edit",producto);
+            this.getProductos();
         },
         async delProducto(producto){
             producto.eliminado = true;
             await this.$http.post(this.urls.productos+"/del",producto);
+            this.getProductos();
         },
         async resetProducto(producto){
             producto.eliminado = false;
             await this.$http.post(this.urls.productos+"/reset",producto);
+            this.getProductos();
         },
         async addPieza(){
             var req = new FormData;
@@ -126,17 +227,21 @@ Vue.component('almacen',{
             req.append('codigoAlterno',this.newPieza.codigoAlterno);
             req.append('idProducto',this.newPieza.idProducto);
             await this.$http.post(this.urls.piezas+"/add",req);
+            this.getPiezas();
         },
         async editPieza(pieza){
             await this.$http.post(this.urls.piezas+"/edit",pieza);
+            this.getPiezas();
         },
         async delPieza(pieza){
             pieza.estatus = "eliminado";
             await this.$http.post(this.urls.piezas+"/del",pieza);
+            this.getPiezas();
         },
         async resetPieza(pieza){
             pieza.estatus = "activo";
             await this.$http.post(this.urls.piezas+"/reset",pieza);
+            this.getPiezas();
         },
         async addImg(evento){
             this.newPieza.img = evento.target.files[0];

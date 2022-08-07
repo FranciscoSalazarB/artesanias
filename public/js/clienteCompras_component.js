@@ -8,20 +8,23 @@ Vue.component('cliente-compras',{
     },
     async mounted(){
         this.ruta = document.getElementById('clienteRuta').value;
-        this.compras = await this.$http.post(this.ruta+"/compras");
-        this.compras = this.compras.body;
-        const hoy = new Date();
-        this.compras = this.compras.map(function(compra){
-            compra.venta.caducado = hoy > new Date(compra.venta.fechaLimitePago);
-            compra.venta.creado = moment(compra.venta.created_at).fromNow();
-            compra.venta.caduca = moment(compra.venta.fechaLimitePago).fromNow();
-            compra.venta.created_at = moment(compra.venta.created_at).format('MMMM Do YYYY, [a las] h:mm:ss a');
-            compra.venta.fechaLimitePago = moment(compra.venta.fechaLimitePago).format('MMMM Do YYYY, [a las] h:mm:ss a');
-            return compra;
-        }); 
+        this.getAllPedidos();
         console.log(this.compras);
     },
     methods:{
+        async getAllPedidos(){
+            this.compras = await this.$http.post(this.ruta+"/compras");
+            this.compras = this.compras.body;
+            const hoy = new Date();
+            this.compras = this.compras.map(function(compra){
+                compra.venta.caducado = hoy > new Date(compra.venta.fechaLimitePago);
+                compra.venta.creado = moment(compra.venta.created_at).fromNow();
+                compra.venta.caduca = moment(compra.venta.fechaLimitePago).fromNow();
+                compra.venta.created_at = moment(compra.venta.created_at).format('MMMM Do YYYY, [a las] h:mm:ss a');
+                compra.venta.fechaLimitePago = moment(compra.venta.fechaLimitePago).format('MMMM Do YYYY, [a las] h:mm:ss a');
+                return compra;
+            }); 
+        },
         total(piezas){
             const precios = piezas.map(pieza=>pieza.precio);
             return 100 + precios.reduce(function(acum,value){
@@ -68,6 +71,7 @@ Vue.component('cliente-compras',{
                                 title : 'Se a subido correctamente la evidencia',
                                 icon : 'success',
                             });
+                            this.getAllPedidos();
                         }
                         
                     } catch (error) {
@@ -98,6 +102,7 @@ Vue.component('cliente-compras',{
                             title : 'Pedido cancelado correctamente',
                             icon: 'success'
                         });
+                        this.getAllPedidos();
                     } catch (error) {
                         Swal.fire({
                             title: 'Error',
