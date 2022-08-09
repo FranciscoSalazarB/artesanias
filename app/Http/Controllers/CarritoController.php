@@ -67,6 +67,7 @@ class CarritoController extends Controller
         $venta->idUser = Auth::id();
         $venta->idDestino = $req->input('idDestino');
         $venta->referenciaEnvio = "";
+        $venta->motivo = "";
         $hoy = PoliticaTiempo::where('dia',date('l'))->first();
         $fechaLimitePago = date_create(date('Y-m-d'));
         $fechaLimiteConfirmar = date_create(date('Y-m-d'));

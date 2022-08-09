@@ -65,7 +65,6 @@ class UserController extends Controller
         $venta = Venta::find($req->input('idVenta'));
         $venta->status = "porConfirmar";
         $venta->save();
-        return url('/');
     }
     public function cancelarPedido(Request $req)
     {

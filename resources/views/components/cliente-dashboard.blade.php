@@ -36,7 +36,7 @@
         <cliente inline-template>
             <div>
                 <div>
-                    <p>Nombre : @{{user.name}} <br>Correo : @{{user.email}} <br> @{{user.roll}}</p>
+                    <p>Nombre : @{{user.name}} <br>Correo : @{{user.email}} <br>Cel : @{{user.cel}} <br> @{{user.roll}}</p>
                 </div>
                 <br>
                 <div>

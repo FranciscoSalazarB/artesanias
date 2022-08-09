@@ -26,6 +26,7 @@ Vue.component('cliente',{
         },
         async agregarDestino(){
             await this.$http.post(this.ruta+'/addDestino',this.newDestino);
+            this.getAllDestinos();
         }
     }
 });
