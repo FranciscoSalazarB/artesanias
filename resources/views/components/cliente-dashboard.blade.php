@@ -85,8 +85,10 @@
                         <p>Estatus : @{{compra.venta.status == 'espera' && compra.venta.caducado ? 'caducado' : compra.venta.status}}</p>
                         <p>Pedido @{{compra.venta.creado}} el @{{compra.venta.created_at}}</p>
                         <p>El tiempo para subir la evidencia @{{ compra.venta.caducado ? 'ha vencido': 'vence '+compra.venta.caduca}} el @{{compra.venta.fechaLimitePago}}</p>
+                        <p v-if="compra.venta.referenciaEnvio">La referencia de envío es : @{{compra.venta.referenciaEnvio}}</p>
+                        <p v-if="compra.venta.status == 'denegado'">Motivo de denegación : @{{compra.venta.motivo}}</p>
                         <p>Total $@{{total(compra.piezas)}}</p>
-                        <p>Enviado a @{{compra.venta.destino.direccion}}</p>
+                        <p>Con destino a @{{compra.venta.destino.direccion}}</p>
                         <div v-for="pieza in compra.piezas">
                             @{{pieza.nombre}}, $@{{pieza.precio}}
                         </div>

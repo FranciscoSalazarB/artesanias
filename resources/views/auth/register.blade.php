@@ -41,6 +41,7 @@
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
+                                placeholder="Mínimo 8 caracteres"
                                 required autocomplete="new-password" />
             </div>
 

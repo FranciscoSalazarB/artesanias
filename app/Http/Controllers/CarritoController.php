@@ -149,19 +149,11 @@ class CarritoController extends Controller
     public function historico()
     {
         $salida = [];
-        $pedidos = Venta::whereIn('status',array('confirmado','cancelado','denegado'))->get();
-        $posiblesCaducados = Venta::where('status','espera')->get();
-        foreach($posiblesCaducados as $posible){
-            if($posible->caducado()) {
-                $posible->cliente;
-                $posible->destino;
-                foreach($posible->detalles as $detalle){
-                    $detalle->pieza;
-                }
-                array_push($salida,$posible);
-            }
-        }
+        $pedidos = Venta::whereIn('status',array('confirmado','cancelado','denegado','espera'))->get();
         foreach($pedidos as $pedido){
+            if($pedido->status == 'espera'){
+                if(!$pedido->caducado()) continue;
+            }
             $pedido->cliente;
             $pedido->destino;
             foreach($pedido->detalles as $detalle){

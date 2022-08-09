@@ -28,7 +28,7 @@
                 <div v-for ="pedidos in listado" class="listado">
                     Estatus : @{{pedidos.status == 'espera'  ? 'caducado' : pedidos.status}}<br>
                     Pedido el : @{{pedidos.created_at}}<br>
-                    Cliente : @{{pedidos.cliente.name}}, @{{pedidos.cliente.email}}<br>
+                    Cliente : @{{pedidos.cliente.name}}, @{{pedidos.cliente.email}}, @{{pedidos.cliente.cel}}<br>
                     Destino : @{{pedidos.destino.direccion}} Estado de @{{pedidos.destino.estado}} municipio @{{pedidos.destino.municipio}}  localidad @{{pedidos.destino.localidad}}<br>
                     CP : @{{pedidos.destino.cp}}<br>
                     <div v-for = "piezas in pedidos.detalles" class="productos">

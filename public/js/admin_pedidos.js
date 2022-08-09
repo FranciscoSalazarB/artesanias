@@ -58,7 +58,17 @@ Vue.component('pedidosadmin',{
                 cancelButtonText:'Cancelar'
             }).then(async result => {
                 if (result.isConfirmed){
-                    await this.$http.post(this.rutas+'/denegado',{idPedido:idPedido});
+                    const { value : motivo } = await Swal.fire({
+                        title : 'Escriba el motivo de la denegación',
+                        input : 'text',
+                        showCancelButton: true,
+                        inputValidator : (value) => {
+                            if (!value) {
+                                return 'Escriba el motivo por favor';
+                            }
+                        }
+                    });
+                    await this.$http.post(this.rutas+'/denegado',{idPedido:idPedido, motivo : motivo});
                     Swal.fire({
                         title : 'Pedido Denegado',
                         icon: 'success'
