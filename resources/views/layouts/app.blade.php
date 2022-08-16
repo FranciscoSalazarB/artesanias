@@ -64,12 +64,13 @@
         var app = new Vue({
             el:"#app",
             data:{
-                picked : ''
+                picked : '',
+                user:''
             },
             async mounted(){
                 var user = await this.$http.post(userRuta);
-                user = user.body;
-                if(user.roll == 'cliente') this.picked = 'politicas';
+                this.user = user.body;
+                if(this.user.roll == 'cliente') this.picked = 'politicas';
                 else this.picked = 'pedidos';
             }
         });

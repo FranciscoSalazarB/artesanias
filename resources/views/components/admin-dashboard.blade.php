@@ -4,7 +4,6 @@
             <div>
                 <input type="hidden" id="rutaPedidos" value = "{{route('adminPedidos')}}">
                 <input type="hidden" id="root" value = "{{route('/')}}">
-                <h1 v-if="pedidosPendientes.length == 0">No hay nuevos pedidos</h1>
                 <div v-for="pedido in pedidosPendientes" class="pedidoPorConfirmar">
                     <h4>para @{{pedido.cliente.name}} Con destino a @{{pedido.destino.direccion}}</h4>
                     <h4>pedido @{{pedido.creado}} por un total de $@{{total(pedido.detalles)}}</h4>
@@ -31,6 +30,7 @@
                     Cliente : @{{pedidos.cliente.name}}, @{{pedidos.cliente.email}}, @{{pedidos.cliente.cel}}<br>
                     Destino : @{{pedidos.destino.direccion}} Estado de @{{pedidos.destino.estado}} municipio @{{pedidos.destino.municipio}}  localidad @{{pedidos.destino.localidad}}<br>
                     CP : @{{pedidos.destino.cp}}<br>
+                    Cel: @{{pedidos.cliente.cel}}
                     <div v-for = "piezas in pedidos.detalles" class="productos">
                         *@{{piezas.pieza.nombre}}<br>
                         $@{{piezas.pieza.precio}}<br>

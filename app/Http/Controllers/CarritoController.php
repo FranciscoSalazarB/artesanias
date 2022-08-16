@@ -164,6 +164,7 @@ class CarritoController extends Controller
             unset($detalle);
         }
         unset($pedido);
+        array_reverse($salida);
         return response()->json($salida);
     }
 }

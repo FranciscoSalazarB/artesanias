@@ -47,6 +47,15 @@ Vue.component('pedidosadmin',{
                 return acum + value;
             });
         },
+        tipos(){
+            var salida =[];
+            this.pedidosPendientes.forEach(item=>{
+                if(!item.status in salida){
+                    salida.push(item.status);
+                }
+            });
+            return salida;
+        },
         async denegar(idPedido){
             Swal.fire({
                 title:'¿Está seguro de denegar este pedido?',
